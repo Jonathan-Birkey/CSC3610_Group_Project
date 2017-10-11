@@ -1,6 +1,7 @@
 package CSC3610_Group_Project;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 import javafx.application.Application;
@@ -31,7 +32,7 @@ public class MasterPaneController extends Application{
 		@FXML
 		private MenuItem miClose;
 		@FXML
-		private MenuItem miSignOut;
+		private MenuItem miDelete;
 		@FXML
 		private MenuItem miAbout;
 		
@@ -41,7 +42,7 @@ public class MasterPaneController extends Application{
 			this.primaryStage = primaryStage;
 			this.primaryStage.setTitle("Tesla");
 
-			//loads master pane 
+
 			FXMLLoader masterLoader = new FXMLLoader();
 			masterLoader.setLocation(MasterPaneController.class.getResource("MasterStage.fxml"));
 			
@@ -51,7 +52,7 @@ public class MasterPaneController extends Application{
 				e.printStackTrace();
 			}
 			
-			//Load LogIn scene into center of master pane
+			
 			FXMLLoader sceneLoader = new FXMLLoader();
 			sceneLoader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
 			
@@ -63,37 +64,43 @@ public class MasterPaneController extends Application{
 			
 			masterLayout.setCenter(loaderScene);
 			
+			
 			Scene scene = new Scene(masterLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		}
 		
-		//Exit GUI when File -> Close is clicked
 		@FXML
 		public void miCloseAction(ActionEvent e){
 			System.exit(0);
 		}
 		@FXML
-		public void miSignOut(ActionEvent e){
-			//Load LogIn scene into center of master pane
-			FXMLLoader sceneLoader = new FXMLLoader();
-			sceneLoader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
+		public void miDeleteAction(ActionEvent e){
 			
-			try{
-				loaderScene = (AnchorPane) sceneLoader.load();
-			}catch (IOException a){
-				a.printStackTrace();
-			}
-			
-			masterLayout.setCenter(loaderScene);
 		}
 		
 		@FXML
 		public void miAboutAction(ActionEvent e){
 			
 		}
+		
+		
+
 
 		public static void main(String[] args) {
+			Customer customer = new Customer();
+			LocalDate date = LocalDate.of(1990, 5, 8);
+			customer.setDOB(date);
+			customer.setEmail("jack@gmail.com");
+			customer.setFirstName("Jack");
+			customer.setLastName("Hill");
+			customer.setPhone("630-123-4567");
+			customer.setSSN("123-45-6789");
+			customer.setAddress("123 Main Street \n Naperville \n IL \n 60101");
+			customer.setPassword("123");
+			customer.setUserName("Jack");
+			userMap.put(customer.getUserName(), customer);
 			launch(args);
 		}
 	}

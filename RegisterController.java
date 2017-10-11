@@ -1,8 +1,8 @@
 package CSC3610_Group_Project;
 
 
-import java.io.IOException;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

@@ -14,10 +14,6 @@ public class CarTest {
 		System.out.println(Tesla2.toString());
 		System.out.println(Tesla3.toString());
 		
-		// Connect to a database
-		Connect conn = new Connect();
-		conn.initalizeDB();
-		
 	}
 
 }

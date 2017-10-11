@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="530.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.LogInController">
    <children>
       <VBox prefHeight="50.0" prefWidth="100.0">

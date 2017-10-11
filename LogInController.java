@@ -1,14 +1,12 @@
 package CSC3610_Group_Project;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -19,6 +17,7 @@ public class LogInController extends Application{
 	private AnchorPane rootLayout;
 	private AnchorPane registerLayout;
 	private AnchorPane userLayout;
+	private AnchorPane forgotLayout;
 	protected static String userName;
 	@FXML
 	private TextField txtUsername;
@@ -28,8 +27,7 @@ public class LogInController extends Application{
 	private Button btnLogIn;
 	@FXML
 	private Button btnRegister;
-	@FXML
-	private Label lblForgotPassword;
+
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -70,7 +68,6 @@ public class LogInController extends Application{
 	@FXML
 	public void btLogInAction(ActionEvent e){
 		if(MasterPaneController.userMap.containsKey(txtUsername.getText())){
-			if(MasterPaneController.userMap.get(txtUsername).getPassword() == txtPassword.getText()){
 				userName = txtUsername.getText();
 				try{
 					FXMLLoader userLoader = new FXMLLoader();
@@ -81,10 +78,17 @@ public class LogInController extends Application{
 				}catch (IOException ex){
 					ex.printStackTrace();
 				}
-			}
 		}
 		else{
-			lblForgotPassword.setText("Did you forget your password? Please try again.");
+			try{
+				FXMLLoader forgotLoader = new FXMLLoader();
+				forgotLoader.setLocation(ForgotPasswordController.class.getResource("ForgotPasswordScene.fxml"));
+				forgotLayout = (AnchorPane) forgotLoader.load();
+				MasterPaneController.masterLayout.setCenter(forgotLayout);
+			
+			}catch (IOException ex){
+				ex.printStackTrace();
+			}
 		}
 	}
 	
