@@ -133,14 +133,17 @@ public class RegisterController extends Application{
 		if(txtFirstName.getText() != null && txtLastName.getText() != null && txtPhoneNumber.getText() != null && txtEmail.getText() != null
 				&& dpDOB.getValue() != null && txtSocialSecurityNumber.getText() != null && txtUsername.getText() != null && txtPassword.getText() != null
 				&& txtStreet.getText() != null && txtCity.getText() != null && cboState.getValue() != null && txtZip.getText() != null){
-			
+			 if (txtPhoneNumber.getText().matches("[a-zA-Z]+")){
+					System.out.println("not numbers");
+					throw new NullPointerException();
+			 }
 			Customer customer = new Customer();
 			customer.setAddress(txtStreet.getText() + " " + txtCity.getText() + " " + cboState.getValue().toString() + ", " + txtZip.getText());
 			customer.setDOB(java.sql.Date.valueOf(dpDOB.getValue()));
 			customer.setEmail(txtEmail.getText());
 			customer.setFirstName(txtFirstName.getText());
 			customer.setLastName(txtLastName.getText());
-			customer.setPassword(txtPassword.getText());
+			customer.setPassword(HashPassword.hashPassword(txtPassword.getText()));
 			customer.setUserName(txtUsername.getText());
 			customer.setPhone(txtPhoneNumber.getText());
 			customer.setSSN(txtSocialSecurityNumber.getText());
