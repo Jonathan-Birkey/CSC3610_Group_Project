@@ -22,14 +22,15 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class UpdateController extends Application{
+	
+	
 
 	private Stage primaryStage;
 	private AnchorPane updateLayout;
-	private AnchorPane logInLayout;
+	private AnchorPane LogIinLayout;
 	@FXML
 	private TextField txtFirstName;
 	@FXML
@@ -102,10 +103,16 @@ public class UpdateController extends Application{
 	
 	@FXML
 	public void initialize(){
-		cboState.setItems(stateList);
-		
-	}
+		cboState.setItems(stateList);	
 	
+		 txtFirstName.setText(UserSceneController.loggedInUser.getFirstName());
+		 txtLastName.setText(UserSceneController.loggedInUser.getLastName());
+		 txtFirstName.setText(UserSceneController.loggedInUser.getFirstName());
+		 txtEmail.setText(UserSceneController.loggedInUser.getEmail());
+		 txtUsername.setText(UserSceneController.loggedInUser.getUserName());
+		 txtPhoneNumber.setText(UserSceneController.loggedInUser.getPhone());
+		txtSocialSecurityNumber.setText(UserSceneController.loggedInUser.getSSN());
+	 }
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -126,44 +133,88 @@ public class UpdateController extends Application{
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-	}
+		}
+		
+		
 
 	@FXML
 	public void btSaveAction(ActionEvent e){
-		if(txtFirstName.getText() != null && txtLastName.getText() != null && txtPhoneNumber.getText() != null && txtEmail.getText() != null
-				&& dpDOB.getValue() != null && txtSocialSecurityNumber.getText() != null && txtUsername.getText() != null && txtPassword.getText() != null
-				&& txtStreet.getText() != null && txtCity.getText() != null && cboState.getValue() != null && txtZip.getText() != null){
-			 if (txtPhoneNumber.getText().matches("[a-zA-Z]+")){
-					System.out.println("not numbers");
-					throw new NullPointerException();
+		if(!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtPhoneNumber.getText().equals("") && !txtEmail.getText().equals("")
+				&& dpDOB.getValue() != null && !txtSocialSecurityNumber.getText().equals("") && !txtUsername.getText().equals("") && !txtPassword.getText().equals("")
+				&& !txtStreet.getText().equals("") && !txtCity.getText().equals("") && !cboState.getSelectionModel().isEmpty() && !txtZip.getText().equals("")){
+			boolean onlyNumbers = true; 
+			// Checks for phone number
+			if(txtPhoneNumber.getText().matches("[a-zA-Z]+")){
+				onlyNumbers = false;
+				// Show alert
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+			    alert.setTitle("Error");
+			    alert.setHeaderText(" Error");
+			    alert.setContentText("Please only use numbers for your Phone number");
+			    alert.showAndWait();	
+			    txtPhoneNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			    txtPhoneNumber.setText("");
+			 } else {
+				txtPhoneNumber.setStyle(null);
 			 }
-			Customer customer = new Customer();
-			customer.setAddress(txtStreet.getText() + " " + txtCity.getText() + " " + cboState.getValue().toString() + ", " + txtZip.getText());
-			customer.setDOB(java.sql.Date.valueOf(dpDOB.getValue()));
-			customer.setEmail(txtEmail.getText());
-			customer.setFirstName(txtFirstName.getText());
-			customer.setLastName(txtLastName.getText());
-			customer.setPassword(HashPassword.hashPassword(txtPassword.getText()));
-			customer.setUserName(txtUsername.getText());
-			customer.setPhone(txtPhoneNumber.getText());
-			customer.setSSN(txtSocialSecurityNumber.getText());
-			
-			// Send in customer to register
-			Connect conn = new Connect();
-			conn.initalizeDB();
-			System.out.println("Sending in customer");
-			conn.register(customer);
-			
-			//MasterPaneController.userMap.put(customer.getUserName(), customer);
-			// Send it back to the log in scene
-			try{
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
-				logInLayout = (AnchorPane) loader.load();
-				MasterPaneController.masterLayout.setCenter(logInLayout);
+			// Checks the value for SSN to make sure its a number
+			if(txtSocialSecurityNumber.getText().matches("[a-zA-Z]+")){
+				onlyNumbers = false;
+				// Show alert
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+			    alert.setTitle("Error");
+			    alert.setHeaderText(" Error");
+			    alert.setContentText("Please only use numbers for your Social Security Number");
+			    alert.showAndWait();	
+				txtSocialSecurityNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+				txtSocialSecurityNumber.setText(null);
+			 }  else {
+				txtSocialSecurityNumber.setStyle("");
+			 }
+			// Checks the value for zip code to make sure its a number
+			if(txtZip.getText().matches("[a-zA-Z]+")){
+				onlyNumbers = false;
+				// Show alert
+				Alert alert = new Alert(Alert.AlertType.ERROR);
+			    alert.setTitle("Error");
+			    alert.setHeaderText(" Error");
+			    alert.setContentText("Please only use numbers for your Zip Code");
+			    alert.showAndWait();	
+				txtZip.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+				txtZip.setText(null);
+			 } else {
+				txtZip.setStyle("");
+			 }
+			// Only goes through if onlyNumbers stayed true
+			if(onlyNumbers){
+				Customer customer = new Customer();
+				customer.setAddress(txtStreet.getText() + " " + txtCity.getText() + " " + cboState.getValue().toString() + ", " + txtZip.getText());
+				customer.setDOB(java.sql.Date.valueOf(dpDOB.getValue()));
+				customer.setEmail(txtEmail.getText());
+				customer.setFirstName(txtFirstName.getText());
+				customer.setLastName(txtLastName.getText());
+				customer.setPassword(HashPassword.hashPassword(txtPassword.getText()));
+				customer.setUserName(txtUsername.getText());
+				customer.setPhone(txtPhoneNumber.getText());
+				customer.setSSN(txtSocialSecurityNumber.getText());
 				
-			}catch (IOException ex){
-				ex.printStackTrace();
+				// Send in customer to register
+				Connect conn = new Connect();
+				conn.initalizeDB();
+				System.out.println("Updating customer");
+				conn.newRegister(customer);
+				conn.closeDB();
+				//MasterPaneController.userMap.put(customer.getUserName(), customer);
+				// Send it back to the log in scene
+				try{
+					FXMLLoader loader = new FXMLLoader();
+					loader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
+					LogIinLayout = (AnchorPane) loader.load();
+					MasterPaneController.masterLayout.setCenter(LogIinLayout);
+					
+				}catch (IOException ex){
+					ex.printStackTrace();
+				}
 			}
 		// If a field is missing
 		} else {
@@ -171,104 +222,68 @@ public class UpdateController extends Application{
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 		    alert.setTitle("Error");
 		    alert.setHeaderText(" Error");
-		    alert.setContentText("Please fill out the selected fields");
+		    alert.setContentText("Please fill out the selected values");
 		    alert.showAndWait();
 		    // Check each individual fields
 			if(txtFirstName.getText().equals("")){
-				lblFName.setText("* First Name:");
-				lblFName.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtFirstName.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblFName.setText("First Name:");
-				lblFName.setTextFill(Color.web("#000000"));
+				txtFirstName.setStyle("");
 			}
 			if(txtLastName.getText().equals("")){
-				lblLName.setText("* Last Name:");
-				lblLName.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtLastName.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblLName.setText("Last Name:");
-				lblLName.setTextFill(Color.web("#000000"));
+				txtLastName.setStyle("");
 			}
 			if(txtPhoneNumber.getText().equals("")){
-				lblPhone.setText("* Phone Number:");
-				lblPhone.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtPhoneNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblPhone.setText("Phone Number:");
-				lblPhone.setTextFill(Color.web("#000000"));
+				txtPhoneNumber.setStyle("");
 			}
 			if(txtEmail.getText().equals("")){
-				lblEmail.setText("* Email:");
-				lblEmail.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtEmail.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblEmail.setText("Email:");
-				lblEmail.setTextFill(Color.web("#000000"));
+				txtEmail.setStyle("");
 			}
 			if(dpDOB.getValue() == null){
-				lblDOB.setText("* Date of Birth:");
-				lblDOB.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				dpDOB.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblDOB.setText("Date of Birth:");
-				lblDOB.setTextFill(Color.web("#000000"));
+				dpDOB.setStyle("");
 			}
 			if(txtSocialSecurityNumber.getText().equals("")){
-				lblSSN.setText("* Social Security Number:");
-				lblSSN.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtSocialSecurityNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblSSN.setText("Social Security Number:");
-				lblSSN.setTextFill(Color.web("#000000"));
+				txtSocialSecurityNumber.setStyle("");
 			}
 			if(txtUsername.getText().equals("")){
-				lblUserName.setText("* Username:");
-				lblUserName.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtUsername.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblUserName.setText("Username:");
-				lblUserName.setTextFill(Color.web("#000000"));
+				txtUsername.setStyle("");
 			}
 			if(txtPassword.getText().equals("")){
-				lblPassword.setText("* Password:");
-				lblPassword.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtPassword.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblPassword.setText("Password:");
-				lblPassword.setTextFill(Color.web("#000000"));
+				txtPassword.setStyle("");
 			}
 			if(txtStreet.getText().equals("")){
-				lblStreet.setText("* Street:");
-				lblStreet.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtStreet.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblStreet.setText("Street:");
-				lblStreet.setTextFill(Color.web("#000000"));
+				txtStreet.setStyle("");
 			}
 			if(txtCity.getText().equals("")){
-				lblCity.setText("* City:");
-				lblCity.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtCity.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblCity.setText("City:");
-				lblCity.setTextFill(Color.web("#000000"));
+				txtCity.setStyle("");
 			}
 			if(cboState.getSelectionModel().isEmpty()){
-				lblState.setText("* State:");
-				lblState.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out state");
+				cboState.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblState.setText("State:");
-				lblState.setTextFill(Color.web("#000000"));
+				cboState.setStyle("");
 			}
 			if(txtZip.getText().equals("")){
-				lblZip.setText("* Zip Code:");
-				lblZip.setTextFill(Color.web("#FF0000"));
-				System.err.println("fill out first name");
+				txtZip.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
 			} else {
-				lblZip.setText("Zip Code:");
-				lblZip.setTextFill(Color.web("#000000"));
+				txtZip.setStyle("");
 			}
 		}
 	} 
@@ -298,10 +313,4 @@ public class UpdateController extends Application{
 		cboState.setValue(null);
 		txtZip.setText(null);
 	}
-
-	
-	public static void main(String[] args){
-		launch(args);
-	}
-	
 }
