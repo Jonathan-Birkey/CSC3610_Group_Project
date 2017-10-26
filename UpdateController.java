@@ -1,7 +1,5 @@
 package CSC3610_Group_Project;
 
-
-
 import java.io.IOException;
 
 import javafx.application.Application;
