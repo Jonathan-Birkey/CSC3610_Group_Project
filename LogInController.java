@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -22,12 +24,14 @@ public class LogInController extends Application{
 	@FXML
 	private TextField txtUsername;
 	@FXML
-	private TextField txtPassword;
+	private PasswordField txtPassword;
 	@FXML
 	private Button btnLogIn;
 	@FXML
 	private Button btnRegister;
-
+	@FXML
+	private Label lblForgotPassword;
+	
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -43,6 +47,7 @@ public class LogInController extends Application{
 		}catch (IOException e){
 			e.printStackTrace();
 		}
+		
 		
 		Scene scene = new Scene(rootLayout);
 		primaryStage.setScene(scene);
@@ -64,36 +69,57 @@ public class LogInController extends Application{
 		}
 		
 	}
-	
+	@FXML
+	public void goToDoc(ActionEvent e) {
+		 getHostServices().showDocument("https://github.com/Jonathan-Birkey/CSC3610_Group_Project/blob/Car-Class/GroupNotes.md");
+	}
 	@FXML
 	public void btLogInAction(ActionEvent e){
-		if(MasterPaneController.userMap.containsKey(txtUsername.getText())){
-				userName = txtUsername.getText();
-				try{
-					FXMLLoader userLoader = new FXMLLoader();
-					userLoader.setLocation(LogInController.class.getResource("UserScene.fxml"));
-					userLayout = (AnchorPane) userLoader.load();
-					MasterPaneController.masterLayout.setCenter(userLayout);
-				
-				}catch (IOException ex){
-					ex.printStackTrace();
-				}
-		}
-		else{
+		// Attempt to log in by creating a connect object
+		Connect conn = new Connect();
+		// Initialize the DB and grab the username and password
+		conn.initalizeDB();
+		userName = txtUsername.getText();
+		
+		String password = HashPassword.hashPassword(txtPassword.getText());
+		// If validate returns true, that means that the user is found in the database and their password is correct
+		if(conn.validate(userName,password)) {
+			// Set a fake "cookie" as loggedInUser that will be used later
+			Person loggedInUser = conn.createPerson(userName);
+			System.out.println("Welcome, " + loggedInUser.getFirstName() + "!");
+			// Try to load the user scene
 			try{
-				FXMLLoader forgotLoader = new FXMLLoader();
-				forgotLoader.setLocation(ForgotPasswordController.class.getResource("ForgotPasswordScene.fxml"));
-				forgotLayout = (AnchorPane) forgotLoader.load();
-				MasterPaneController.masterLayout.setCenter(forgotLayout);
+				UserSceneController.loggedInUser = loggedInUser;
+				FXMLLoader userLoader = new FXMLLoader();
+				userLoader.setLocation(LogInController.class.getResource("HomeScene.fxml"));
+				userLayout = (AnchorPane) userLoader.load();
+				
+				MasterPaneController.masterLayout.setCenter(userLayout);
+				
+
+//				MasterPaneController.masterLayout.setMinHeight(740.0);
+//				MasterPaneController.masterLayout.setMinWidth(471.0);
+
 			
 			}catch (IOException ex){
 				ex.printStackTrace();
 			}
+		// If the user is not found in the database OR if the password is incorrect
+		} else {
+		
+			try{
+				FXMLLoader userLoader = new FXMLLoader();
+				userLoader.setLocation(ForgotPasswordController.class.getResource("ForgotPasswordScene.fxml"));
+				forgotLayout = (AnchorPane) userLoader.load();
+				MasterPaneController.masterLayout.setCenter(forgotLayout);
+			
+			}catch (IOException ex){
+				ex.printStackTrace();
+			}		
 		}
-	}
+		conn.closeDB();
+		
+}
 	
-	public static void main(String[] args){
-		launch(args);
-	}
 	
 }

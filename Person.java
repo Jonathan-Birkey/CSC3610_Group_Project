@@ -1,23 +1,26 @@
 	package CSC3610_Group_Project;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class Person {
 	
 	//Variables 
-		private String firstName, lastName, phone, email, address, userName, password;
-		private LocalDate DOB; 
+		private String firstName, lastName, phone, email, street, city, state, zip, userName, password;
+		private Date DOB; 
 		private String SSN;
 		
 		//constructor
-		public Person(String firstName, String lastName, String phone, String email, String address, String userName,
-				String password, LocalDate dOB2, String sSN2) {
+		public Person(String firstName, String lastName, String phone, String email,String street, String state, String city, String zip, String userName,
+				String password, Date dOB2, String sSN2) {
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
 			this.phone = phone;
 			this.email = email;
-			this.address = address;
+			this.city = city;
+			this.state =street;
+			this.state = state;
+			this.zip = zip;
 			this.userName = userName;
 			this.password = password;
 			this.DOB = dOB2;
@@ -54,11 +57,11 @@ public class Person {
 		protected void setEmail(String email) {
 			this.email = email;
 		}
-		protected String getAddress() {
-			return address;
+		protected String getcity() {
+			return city;
 		}
-		protected void setAddress(String address) {
-			this.address = address;
+		protected void setcity(String address) {
+			this.city = address;
 		}
 		protected String getUserName() {
 			return userName;
@@ -72,11 +75,11 @@ public class Person {
 		protected void setPassword(String password) {
 			this.password = password;
 		}
-		protected LocalDate getDOB() {
+		protected Date getDOB() {
 			return DOB;
 		}
-		protected void setDOB(LocalDate localDate) {
-			DOB = localDate;
+		protected void setDOB(Date date) {
+			this.DOB = date;
 		}
 		protected String getSSN() {
 			return SSN;
@@ -84,11 +87,34 @@ public class Person {
 		protected void setSSN(String sSN) {
 			SSN = sSN;
 		}
+		
+		public String getStreet() {
+			return street;
+		}
+
+		public void setStreet(String street) {
+			this.street = street;
+		}
+
+		public String getState() {
+			return state;
+		}
+
+		public void setState(String state) {
+			this.state = state;
+		}
+
+		public String getZip() {
+			return zip;
+		}
+
+		public void setZip(String zip) {
+			this.zip = zip;
+		}
 
 		@Override
 		public String toString() {
-			return firstName + "\n" + lastName + "\n" + phone + "\n" + email + "\n" + address 
-					+ "\n" + userName + "\n" + password + "\n" + DOB + "\n" + SSN;
+			return "Name: " + firstName + " " + lastName + "\nPhone Number: " + phone + "\nEmail: " + email + "\nAddress: " + street + "\n" 
+					+ city + "\n" + state + "," + zip + "\nUsername: " + userName + "\nPassword: " + password + "\nDOB: " + DOB + "\nSSN: " + SSN;
 		}
-
 	}

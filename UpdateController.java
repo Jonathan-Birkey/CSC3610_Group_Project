@@ -3,6 +3,7 @@ package CSC3610_Group_Project;
 
 
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -22,11 +24,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class RegisterController extends Application{
+public class UpdateController extends Application{
+	
+	
 
 	private Stage primaryStage;
-	private AnchorPane rootLayout;
-	private AnchorPane logInLayout;
+	private AnchorPane updateLayout;
+	private AnchorPane LogIinLayout;
 	@FXML
 	private TextField txtFirstName;
 	@FXML
@@ -67,7 +71,30 @@ public class RegisterController extends Application{
 	private MenuItem miDelete;
 	@FXML
 	private MenuItem miAbout;
-
+	@FXML
+	private Label lblFName;
+	@FXML
+	private Label lblLName;
+	@FXML
+	private Label lblPhone;
+	@FXML
+	private Label lblEmail;
+	@FXML
+	private Label lblDOB;
+	@FXML
+	private Label lblSSN;
+	@FXML
+	private Label lblStreet;
+	@FXML
+	private Label lblCity;
+	@FXML
+	private Label lblZip;
+	@FXML
+	private Label lblUserName;
+	@FXML
+	private Label lblPassword;
+	@FXML
+	private Label lblState;
 	
 	private ObservableList<String> stateList = FXCollections.observableArrayList("AL", "AK", "AZ", "AR", "CA", "CO", "CT",
 			"DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT",
@@ -76,32 +103,43 @@ public class RegisterController extends Application{
 	
 	@FXML
 	public void initialize(){
-		cboState.setItems(stateList);
-		cboState.setValue("AL");
-		
-	}
+		cboState.setItems(stateList);	
 	
+		 txtFirstName.setText(UserSceneController.loggedInUser.getFirstName());
+		 txtLastName.setText(UserSceneController.loggedInUser.getLastName());
+		 txtEmail.setText(UserSceneController.loggedInUser.getEmail());
+		 txtUsername.setText(UserSceneController.loggedInUser.getUserName());
+		 txtPhoneNumber.setText(UserSceneController.loggedInUser.getPhone());
+		 txtSocialSecurityNumber.setText(UserSceneController.loggedInUser.getSSN());
+		 cboState.setValue(UserSceneController.loggedInUser.getState());
+		 txtStreet.setText(UserSceneController.loggedInUser.getStreet());
+		 txtCity.setText(UserSceneController.loggedInUser.getcity());
+		 txtZip.setText(UserSceneController.loggedInUser.getZip());
+		 dpDOB.setPromptText(UserSceneController.loggedInUser.getDOB().toString());
+	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Register");
+		this.primaryStage.setTitle("Update Information");
 
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(RegisterController.class.getResource("RegisterScene.fxml"));
+		loader.setLocation(UpdateController.class.getResource("UpdateScene.fxml"));
 		
 		try{
-			rootLayout = (AnchorPane) loader.load();
+			updateLayout = (AnchorPane) loader.load();
 		}catch (IOException e){
 			e.printStackTrace();
 		}
 		
-		Scene scene = new Scene(rootLayout);
+		Scene scene = new Scene(updateLayout);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
-	}
+		}
+		
+		
 
 	@FXML
 	public void btSaveAction(ActionEvent e){
@@ -155,9 +193,9 @@ public class RegisterController extends Application{
 			if(onlyNumbers){
 				Customer customer = new Customer();
 				customer.setStreet(txtStreet.getText());
-				customer.setcity(txtCity.getText());
-				customer.setState(cboState.getValue().toString());
 				customer.setZip(txtZip.getText());
+				customer.setcity(txtCity.getText());
+				customer.setState(cboState.getValue());
 				customer.setDOB(java.sql.Date.valueOf(dpDOB.getValue()));
 				customer.setEmail(txtEmail.getText());
 				customer.setFirstName(txtFirstName.getText());
@@ -170,16 +208,16 @@ public class RegisterController extends Application{
 				// Send in customer to register
 				Connect conn = new Connect();
 				conn.initalizeDB();
-				System.out.println("Sending in customer");
-				conn.register(customer);
+				System.out.println("Updating customer");
+				conn.updateUser(customer);
 				conn.closeDB();
 				//MasterPaneController.userMap.put(customer.getUserName(), customer);
 				// Send it back to the log in scene
 				try{
 					FXMLLoader loader = new FXMLLoader();
 					loader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
-					logInLayout = (AnchorPane) loader.load();
-					MasterPaneController.masterLayout.setCenter(logInLayout);
+					LogIinLayout = (AnchorPane) loader.load();
+					MasterPaneController.masterLayout.setCenter(LogIinLayout);
 					
 				}catch (IOException ex){
 					ex.printStackTrace();
@@ -282,7 +320,4 @@ public class RegisterController extends Application{
 		cboState.setValue(null);
 		txtZip.setText(null);
 	}
-
-	
-	
 }
