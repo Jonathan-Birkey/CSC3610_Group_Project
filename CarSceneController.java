@@ -1,6 +1,6 @@
 package CSC3610_Group_Project;
 
-<<<<<<< HEAD
+
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
@@ -13,21 +13,16 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-=======
 import java.io.IOException;
 import java.time.LocalDate;
 import javafx.application.Application;
->>>>>>> origin/Car-Class
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-<<<<<<< HEAD
 import javafx.scene.control.Label;
-=======
->>>>>>> origin/Car-Class
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -41,7 +36,6 @@ public class CarSceneController extends Application {
 	private AnchorPane controlsData;
 	private AnchorPane userLayout;
 
-=======
 	
 	public static Person loggedInUser;
 	
