@@ -1,4 +1,4 @@
-	package CSC3610_Group_Project;
+package CSC3610_Group_Project;
 
 import java.sql.Date;
 
@@ -6,20 +6,12 @@ public class Person {
 	
 	//Variables 
 		private String firstName, lastName, phone, email, street, city, state, zip, userName, password;
-<<<<<<< HEAD
 		private Date DOB; 
-=======
-		private java.sql.Date DOB; 
->>>>>>> origin/Car-Class
 		private String SSN;
 		
 		//constructor
 		public Person(String firstName, String lastName, String phone, String email,String street, String state, String city, String zip, String userName,
-<<<<<<< HEAD
 				String password, Date dOB2, String sSN2) {
-=======
-				String password, java.sql.Date dOB2, String sSN2) {
->>>>>>> origin/Car-Class
 			super();
 			this.firstName = firstName;
 			this.lastName = lastName;
@@ -86,11 +78,7 @@ public class Person {
 		protected Date getDOB() {
 			return DOB;
 		}
-<<<<<<< HEAD
 		protected void setDOB(Date date) {
-=======
-		protected void setDOB(java.sql.Date date) {
->>>>>>> origin/Car-Class
 			this.DOB = date;
 		}
 		protected String getSSN() {
