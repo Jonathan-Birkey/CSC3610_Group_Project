@@ -107,6 +107,10 @@ public class UpdateController extends Application{
 	
 		 txtFirstName.setText(UserSceneController.loggedInUser.getFirstName());
 		 txtLastName.setText(UserSceneController.loggedInUser.getLastName());
+<<<<<<< HEAD
+=======
+		 txtFirstName.setText(UserSceneController.loggedInUser.getFirstName());
+>>>>>>> origin/Car-Class
 		 txtEmail.setText(UserSceneController.loggedInUser.getEmail());
 		 txtUsername.setText(UserSceneController.loggedInUser.getUserName());
 		 txtPhoneNumber.setText(UserSceneController.loggedInUser.getPhone());
@@ -115,7 +119,10 @@ public class UpdateController extends Application{
 		 txtStreet.setText(UserSceneController.loggedInUser.getStreet());
 		 txtCity.setText(UserSceneController.loggedInUser.getcity());
 		 txtZip.setText(UserSceneController.loggedInUser.getZip());
+<<<<<<< HEAD
 		 dpDOB.setPromptText(UserSceneController.loggedInUser.getDOB().toString());
+=======
+>>>>>>> origin/Car-Class
 	}
 	
 	@Override
@@ -191,6 +198,7 @@ public class UpdateController extends Application{
 			 }
 			// Only goes through if onlyNumbers stayed true
 			if(onlyNumbers){
+<<<<<<< HEAD
 				Customer customer = new Customer();
 				customer.setStreet(txtStreet.getText());
 				customer.setZip(txtZip.getText());
@@ -204,6 +212,21 @@ public class UpdateController extends Application{
 				customer.setUserName(txtUsername.getText());
 				customer.setPhone(txtPhoneNumber.getText());
 				customer.setSSN(txtSocialSecurityNumber.getText());
+=======
+				String customer = new String();
+				txtFirstName.getText();
+				txtZip.getText();
+				txtCity.getText();
+				cboState.getValue();
+				java.sql.Date.valueOf(dpDOB.getValue());
+				txtEmail.getText();
+				txtFirstName.getText();
+				txtLastName.getText();
+				HashPassword.hashPassword(txtPassword.getText());
+				txtUsername.getText();
+				txtPhoneNumber.getText();
+				txtSocialSecurityNumber.getText();
+>>>>>>> origin/Car-Class
 				
 				// Send in customer to register
 				Connect conn = new Connect();

@@ -1,5 +1,6 @@
 package CSC3610_Group_Project;
 
+<<<<<<< HEAD
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
@@ -12,18 +13,27 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+=======
+import java.io.IOException;
+import java.time.LocalDate;
+import javafx.application.Application;
+>>>>>>> origin/Car-Class
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+<<<<<<< HEAD
 import javafx.scene.control.Label;
+=======
+>>>>>>> origin/Car-Class
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class CarSceneController extends Application {
+<<<<<<< HEAD
 
 	public static Person loggedInUser;
 
@@ -31,6 +41,16 @@ public class CarSceneController extends Application {
 	private AnchorPane controlsData;
 	private AnchorPane userLayout;
 
+=======
+	
+	public static Person loggedInUser;
+	
+	
+	private Stage primaryStage;
+	private AnchorPane controlsData;
+	private AnchorPane userLayout;
+	
+>>>>>>> origin/Car-Class
 	@FXML
 	private Button btnCart;
 	@FXML
@@ -49,6 +69,7 @@ public class CarSceneController extends Application {
 	private ComboBox<String> cboWheels;
 	@FXML
 	private ComboBox<String> cboRoof;
+<<<<<<< HEAD
 	@FXML
 	private Label lblPrice;
 
@@ -181,3 +202,38 @@ public class CarSceneController extends Application {
 	public void start(Stage arg0) throws Exception {
 	}
 }
+=======
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		
+		
+	}
+	
+	//Update Info button
+	 @FXML
+	private void initialize() {
+	
+		 
+		
+	 }
+	 
+	 @FXML
+	 public void goBack(ActionEvent e){	
+			FXMLLoader userLoader = new FXMLLoader();
+			userLoader.setLocation(LogInController.class.getResource("HomeScene.fxml"));
+			try {
+				userLayout = (AnchorPane) userLoader.load();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			MasterPaneController.masterLayout.setCenter(userLayout);
+	 }
+}
+
+
+
+
+
+>>>>>>> origin/Car-Class
