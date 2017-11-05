@@ -13,23 +13,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.UserInforamtionController">
-=======
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.UserSceneController">
->>>>>>> origin/Car-Class
+
    <children>
       <Pane prefHeight="537.0" prefWidth="550.0">
          <children>
-<<<<<<< HEAD
             <ImageView fitHeight="356.0" fitWidth="550.0" layoutX="2.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
-=======
-            <ImageView fitHeight="291.0" fitWidth="550.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@P100DModelSRed.jpg" />
-               </image>
->>>>>>> origin/Car-Class
                <effect>
                   <Reflection />
                </effect>
@@ -38,7 +30,6 @@
                </image>
             </ImageView>
             <VBox prefHeight="100.0" prefWidth="550.0" />
-<<<<<<< HEAD
             <Button fx:id="btnUpdateInfo" layoutX="14.0" layoutY="499.0" mnemonicParsing="false" onAction="#initialize" text="Update Information" />
             <Button fx:id="btnHome" layoutX="484.0" layoutY="499.0" mnemonicParsing="false" onAction="#initialize" text="Home" />
             <Button fx:id="btnCustomize" layoutX="236.0" layoutY="499.0" mnemonicParsing="false" onAction="#btnCustomize" text="Customize Car" />
@@ -107,13 +98,6 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-=======
-            <Label layoutX="273.0" layoutY="96.0" />
-            <Button fx:id="btnUpdateInfo" layoutX="8.0" layoutY="511.0" mnemonicParsing="false" text="Update Information" />
-            <Button fx:id="btnCart" layoutX="498.0" layoutY="511.0" mnemonicParsing="false" text="Cart" />
-            <Button fx:id="btnCustomize" layoutX="236.0" layoutY="511.0" mnemonicParsing="false" text="Customize Car" />
-            <TextArea fx:id="txtDisplayArea" editable="false" layoutX="151.0" layoutY="299.0" prefHeight="201.0" prefWidth="244.0" />
->>>>>>> origin/Car-Class
          </children>
       </Pane>
    </children>

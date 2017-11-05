@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<<<<<<< HEAD
+
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.UserSceneController">
-=======
+
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.shape.*?>
@@ -31,7 +30,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.UserSceneController">
->>>>>>> origin/Car-Class
+
    <children>
       <ImageView fitHeight="599.0" fitWidth="938.0" layoutX="-24.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -49,11 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-<<<<<<< HEAD
       <Button fx:id="btnProfile" layoutX="380.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnProfile" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Profile">
-=======
-      <Button fx:id="btnProfile" layoutX="380.0" layoutY="14.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Profile">
->>>>>>> origin/Car-Class
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
