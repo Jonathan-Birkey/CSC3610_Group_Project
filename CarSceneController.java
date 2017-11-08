@@ -25,11 +25,7 @@ public class CarSceneController extends Application {
 	private Stage primaryStage;
 	private AnchorPane controlsData;
 	private AnchorPane userLayout;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> origin/Car-Class
 	@FXML
 	private Button btnCart;
 	@FXML
@@ -179,8 +175,4 @@ public class CarSceneController extends Application {
 	@Override
 	public void start(Stage arg0) throws Exception {
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/Car-Class
