@@ -95,6 +95,7 @@ public class UserSceneController extends Application {
 			}
 			
 			MasterPaneController.masterLayout.setCenter(infoLayout);
+<<<<<<< HEAD
 	 }
 	 
 	 @FXML
@@ -108,5 +109,7 @@ public class UserSceneController extends Application {
 			}
 			
 			MasterPaneController.masterLayout.setCenter(cartLayout);
+=======
+>>>>>>> origin/Car-Class
 	 }
 }
