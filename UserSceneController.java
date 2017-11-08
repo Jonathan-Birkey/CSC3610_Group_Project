@@ -2,6 +2,7 @@ package CSC3610_Group_Project;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,10 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-<<<<<<< HEAD
-=======
-import javafx.scene.control.TextArea;
->>>>>>> origin/Car-Class
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -26,8 +23,8 @@ public class UserSceneController extends Application {
 	private Stage primaryStage;
 	private AnchorPane controlsData;
 	private AnchorPane userLayout;
-<<<<<<< HEAD
 	private AnchorPane infoLayout;
+	private AnchorPane cartLayout;
 	
 	
 	@FXML
@@ -39,18 +36,6 @@ public class UserSceneController extends Application {
 	@FXML
 	private Button btnProfile;
 	@FXML
-=======
-	
-	@FXML
-	private Button btnCart;
-	@FXML
-	private Button btnBack;
-	@FXML
-	private Button btnGetStarted;
-	@FXML
-	private Button btnProfile;
-	@FXML
->>>>>>> origin/Car-Class
 	private Button btnSales;
 	@FXML
 	private ComboBox<String> cboColor;
@@ -79,7 +64,6 @@ public class UserSceneController extends Application {
 		Scene scene = new Scene(controlsData);
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
 	}
 	
 	//Update Info button
@@ -92,7 +76,6 @@ public class UserSceneController extends Application {
 	 public void getStarted(ActionEvent e){	
 			FXMLLoader userLoader = new FXMLLoader();
 			userLoader.setLocation(LogInController.class.getResource("CarScene.fxml"));
-<<<<<<< HEAD
 			try {
 				userLayout = (AnchorPane) userLoader.load();
 			} catch (IOException e1) {
@@ -107,23 +90,23 @@ public class UserSceneController extends Application {
 			userinfoLoader.setLocation(UserInforamtionController.class.getResource("UserScene.fxml"));
 			try {
 				infoLayout = (AnchorPane) userinfoLoader.load();
-=======
-			try {
-				userLayout = (AnchorPane) userLoader.load();
->>>>>>> origin/Car-Class
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 			
-<<<<<<< HEAD
 			MasterPaneController.masterLayout.setCenter(infoLayout);
-=======
-			MasterPaneController.masterLayout.setCenter(userLayout);
->>>>>>> origin/Car-Class
+	 }
+	 
+	 @FXML
+	 public void btnCart(ActionEvent e){	
+			FXMLLoader cartLoader = new FXMLLoader();
+			cartLoader.setLocation(CartSceneController.class.getResource("CartScene.fxml"));
+			try {
+				cartLayout = (AnchorPane) cartLoader.load();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			MasterPaneController.masterLayout.setCenter(cartLayout);
 	 }
 }
-
-
-
-
-

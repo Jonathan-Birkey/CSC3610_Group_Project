@@ -87,10 +87,7 @@ public class Connect {
 				person1.setState(rs1.getString(7));
 				person1.setZip(rs1.getString(8));
 				person1.setUserName(rs1.getString(9));
-<<<<<<< HEAD
 				person1.setPassword(rs1.getString(10));
-=======
->>>>>>> origin/Car-Class
 				person1.setDOB(rs1.getDate(11));
 				person1.setSSN(rs1.getString(12));
 				
@@ -134,7 +131,6 @@ public class Connect {
 	}
 	
 		//Update User action
-<<<<<<< HEAD
 		public void updateUser(Customer person1) {
 			// Prepare the statement by setting the strings equal to the various getter methods
 			try {
@@ -146,29 +142,6 @@ public class Connect {
 				
 				
 				System.out.print(person1);
-=======
-		public void updateUser(String update) {
-			// Prepare the statement by setting the strings equal to the various getter methods
-			try {
-/*				String nnnnnnnnnnaaaame = UserSceneController.loggedInUser.getUserName();
-				Statement statement = connection.createStatement();
-				ResultSet rs1 = statement.executeQuery("UPDATE user SET firstName = '', lastName = '?' WHERE userName = " + nnnnnnnnnnaaaame);
-			    String sql = "DELETE FROM user WHERE username = ?";
-				 
-				PreparedStatement statement = connection.prepareStatement(sql);
-				statement.setString(6, update.getUserName() );
-				 
-				int rowsDeleted = statement.executeUpdate();
-				if (rowsDeleted > 0) {
-			    System.out.println("A user was deleted successfully!");
-			
-*/				// Will take in a customer object and create a prepared statement
-				Person person1 = new Person();
-				String query = "UPDATE user SET firstName = ?, lastName = ?, phone = ?, email = ?, street = ?, city = ?, state = ?, zip = ?, password  = ?, DOB = ?, ssn = ? "
-									+ "WHERE username = ?";
-				
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
->>>>>>> origin/Car-Class
 				preparedStatement.setString(1, person1.getFirstName());
 				preparedStatement.setString(2, person1.getLastName());
 				preparedStatement.setString(3, person1.getPhone());
@@ -177,17 +150,10 @@ public class Connect {
 				preparedStatement.setString(6, person1.getcity());
 				preparedStatement.setString(7, person1.getState());
 				preparedStatement.setString(8, person1.getZip());
-<<<<<<< HEAD
 				preparedStatement.setString(12, person1.getUserName());
 				preparedStatement.setString(9, person1.getPassword());
 				preparedStatement.setDate(10, person1.getDOB(), new GregorianCalendar() );
 				preparedStatement.setString(11, person1.getSSN());
-=======
-				preparedStatement.setString(9, person1.getUserName());
-				preparedStatement.setString(10, person1.getPassword());
-				preparedStatement.setDate(11, person1.getDOB(), new GregorianCalendar() );
-				preparedStatement.setString(12, person1.getSSN());
->>>>>>> origin/Car-Class
 				
 
 				// Execute the query
