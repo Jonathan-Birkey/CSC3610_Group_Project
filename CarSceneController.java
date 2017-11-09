@@ -1,8 +1,14 @@
 package CSC3610_Group_Project;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -12,9 +18,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -46,6 +56,8 @@ public class CarSceneController extends Application {
 	private ComboBox<String> cboRoof;
 	@FXML
 	private Label lblPrice;
+	@FXML
+	private ImageView carPicture;
 
 	private String battery;
 	private double price = 79000.00;
@@ -73,6 +85,7 @@ public class CarSceneController extends Application {
 		cboInterior.setItems(interiorList);
 		cboWheels.setItems(wheelList);
 		cboRoof.setItems(roofList);
+		carPicture.setImage(new Image("CSC3610_Group_Project/modelSGray.png"));
 
 		// populate the hashMap
 		hMap.put("Black", 0.0);
@@ -97,11 +110,27 @@ public class CarSceneController extends Application {
 		cboColor.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
-				// System.out.println(t1);
-				// System.out.println(hMap.get(t1));
 				priceColor = hMap.get(t1);
 				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
-				System.out.println(price + "\n" + priceMods);
+
+				// change picture as the user picks the color
+				switch (t1) {
+				case "Black":
+					carPicture.setImage(new Image("CSC3610_Group_Project/black.jpg"));
+					break;
+				case "Silver":
+					carPicture.setImage(new Image("CSC3610_Group_Project/silver.jpg"));
+					break;
+				case "Blue":
+					carPicture.setImage(new Image("CSC3610_Group_Project/blue.jpg"));
+					break;
+				case "Red":
+					carPicture.setImage(new Image("CSC3610_Group_Project/red.jpg"));
+					break;
+				case "White":
+					carPicture.setImage(new Image("CSC3610_Group_Project/white.jpg"));
+					break;
+				}
 			}
 		});
 
@@ -111,6 +140,25 @@ public class CarSceneController extends Application {
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceInterior = hMap.get(t1);
 				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
+
+				// change picture as the user picks the interior color
+				switch (t1) {
+				case "Black Premium":
+					carPicture.setImage(new Image("CSC3610_Group_Project/Black Premium.jpg"));
+					break;
+				case "White Premium":
+					carPicture.setImage(new Image("CSC3610_Group_Project/White Premium.jpg"));
+					break;
+				case "Cream Premium":
+					carPicture.setImage(new Image("CSC3610_Group_Project/Cream Premium.jpg"));
+					break;
+				case "Black Standard":
+					carPicture.setImage(new Image("CSC3610_Group_Project/Black Standard.jpg"));
+					break;
+				case "Clasic Black":
+					carPicture.setImage(new Image("CSC3610_Group_Project/Clasic Black.jpg"));
+					break;
+				}
 			}
 		});
 
@@ -147,7 +195,7 @@ public class CarSceneController extends Application {
 		btn100D.setStyle("-fx-background-color: #c2c2c2");
 		btn75D.setStyle("-fx-background-color: #ffffff");
 		btnP100D.setStyle("-fx-background-color: #ffffff");
-		price = 100000.0;
+		price = 98500.0;
 		battery = "100D";
 	}
 
@@ -156,7 +204,7 @@ public class CarSceneController extends Application {
 		btnP100D.setStyle("-fx-background-color: #c2c2c2");
 		btn100D.setStyle("-fx-background-color: #ffffff");
 		btn75D.setStyle("-fx-background-color: #ffffff");
-		price = 150000.0;
+		price = 136000.0;
 		battery = "P100D";
 	}
 
@@ -176,3 +224,12 @@ public class CarSceneController extends Application {
 	public void start(Stage arg0) throws Exception {
 	}
 }
+
+/*
+ * public void initialize(URL location, ResourceBundle resources) { File file =
+ * new File("teslaProfile.jpg"); Image image = new
+ * Image(file.toURI().toString()); carPicture.setImage(image); }
+ * 
+ * // carPicture.setOnAction(new EventHandler<ActionEvent>() { // public void
+ * handle(ActionEvent e) { // // } // }); //
+ */
