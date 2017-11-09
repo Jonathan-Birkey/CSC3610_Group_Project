@@ -143,157 +143,153 @@ public class UpdateController extends Application{
 
 	@FXML
 	public void btSaveAction(ActionEvent e){
-		if(!txtFirstName.getText().equals("") && !txtLastName.getText().equals("") && !txtPhoneNumber.getText().equals("") && !txtEmail.getText().equals("")
-				&& dpDOB.getValue() != null && !txtSocialSecurityNumber.getText().equals("") && !txtUsername.getText().equals("") && !txtPassword.getText().equals("")
-				&& !txtStreet.getText().equals("") && !txtCity.getText().equals("") && !cboState.getSelectionModel().isEmpty() && !txtZip.getText().equals("")){
-			boolean onlyNumbers = true; 
-			// Checks for phone number
-			if(txtPhoneNumber.getText().matches("[a-zA-Z]+")){
-				onlyNumbers = false;
-				// Show alert
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-			    alert.setTitle("Error");
-			    alert.setHeaderText(" Error");
-			    alert.setContentText("Please only use numbers for your Phone number");
-			    alert.showAndWait();	
-			    txtPhoneNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			    txtPhoneNumber.setText("");
-			 } else {
-				txtPhoneNumber.setStyle(null);
-			 }
-			// Checks the value for SSN to make sure its a number
-			if(txtSocialSecurityNumber.getText().matches("[a-zA-Z]+")){
-				onlyNumbers = false;
-				// Show alert
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-			    alert.setTitle("Error");
-			    alert.setHeaderText(" Error");
-			    alert.setContentText("Please only use numbers for your Social Security Number");
-			    alert.showAndWait();	
-				txtSocialSecurityNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-				txtSocialSecurityNumber.setText(null);
-			 }  else {
-				txtSocialSecurityNumber.setStyle("");
-			 }
-			// Checks the value for zip code to make sure its a number
-			if(txtZip.getText().matches("[a-zA-Z]+")){
-				onlyNumbers = false;
-				// Show alert
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-			    alert.setTitle("Error");
-			    alert.setHeaderText(" Error");
-			    alert.setContentText("Please only use numbers for your Zip Code");
-			    alert.showAndWait();	
-				txtZip.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-				txtZip.setText(null);
-			 } else {
-				txtZip.setStyle("");
-			 }
-			// Only goes through if onlyNumbers stayed true
-			if(onlyNumbers){
-				Customer customer = new Customer();
-				customer.setStreet(txtStreet.getText());
-				customer.setZip(txtZip.getText());
-				customer.setcity(txtCity.getText());
-				customer.setState(cboState.getValue());
-				customer.setDOB(java.sql.Date.valueOf(dpDOB.getValue()));
-				customer.setEmail(txtEmail.getText());
-				customer.setFirstName(txtFirstName.getText());
-				customer.setLastName(txtLastName.getText());
-				customer.setPassword(HashPassword.hashPassword(txtPassword.getText()));
-				customer.setUserName(txtUsername.getText());
-				customer.setPhone(txtPhoneNumber.getText());
-				customer.setSSN(txtSocialSecurityNumber.getText());
-				
-				// Send in customer to register
-				Connect conn = new Connect();
-				conn.initalizeDB();
-				System.out.println("Updating customer");
-				conn.updateUser(customer.getUserName());
-				conn.closeDB();
-				//MasterPaneController.userMap.put(customer.getUserName(), customer);
-				// Send it back to the log in scene
-				try{
-					FXMLLoader loader = new FXMLLoader();
-					loader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
-					LogIinLayout = (AnchorPane) loader.load();
-					MasterPaneController.masterLayout.setCenter(LogIinLayout);
-					
-				}catch (IOException ex){
-					ex.printStackTrace();
-				}
-			}
-		// If a field is missing
+		boolean correctFields = true;
+		// Check each individual fields
+		if(txtFirstName.getText().equals("")){
+			txtFirstName.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
 		} else {
+			txtFirstName.setStyle("");
+		}
+		if(txtLastName.getText().equals("")){
+			txtLastName.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtLastName.setStyle("");
+		}
+		if(txtPhoneNumber.getText().equals("")){
+			txtPhoneNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else if (txtPhoneNumber.getText().matches("[a-zA-Z]+")){
 			// Show alert
 			Alert alert = new Alert(Alert.AlertType.ERROR);
 		    alert.setTitle("Error");
 		    alert.setHeaderText(" Error");
-		    alert.setContentText("Please fill out the selected values");
-		    alert.showAndWait();
-		    // Check each individual fields
-			if(txtFirstName.getText().equals("")){
-				txtFirstName.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtFirstName.setStyle("");
+		    alert.setContentText("Please only use numbers for your Phone number");
+		    alert.showAndWait();	
+		    txtPhoneNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		}else {
+			txtPhoneNumber.setStyle("");
+		}
+		if(txtEmail.getText().equals("")){
+			txtEmail.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtEmail.setStyle("");
+		}
+		if(dpDOB.getValue() == null){
+			dpDOB.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			dpDOB.setStyle("");
+		}
+		if(txtSocialSecurityNumber.getText().equals("")){
+			txtSocialSecurityNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else if (txtSocialSecurityNumber.getText().matches("[a-zA-Z]+")){
+			// Show alert
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+		    alert.setTitle("Error");
+		    alert.setHeaderText(" Error");
+		    alert.setContentText("Please only use numbers for your Social Security Number");
+		    alert.showAndWait();	
+		    txtSocialSecurityNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		}else {
+			txtSocialSecurityNumber.setStyle("");
+		}
+		if(txtUsername.getText().equals("")){
+			txtUsername.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtUsername.setStyle("");
+		}
+		if(txtPassword.getText().equals("")){
+			txtPassword.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtPassword.setStyle("");
+		}
+		if(txtStreet.getText().equals("")){
+			txtStreet.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtStreet.setStyle("");
+		}
+		if(txtCity.getText().equals("")){
+			txtCity.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtCity.setStyle("");
+		}
+		if(cboState.getSelectionModel().isEmpty()){
+			cboState.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			cboState.setStyle("");
+		}
+		if(txtZip.getText().equals("")){
+			txtZip.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else if (txtZip.getText().matches("[a-zA-Z]+")){
+			// Show alert
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+		    alert.setTitle("Error");
+		    alert.setHeaderText(" Error");
+		    alert.setContentText("Please only use numbers for your Zip Code");
+		    alert.showAndWait();	
+		    txtZip.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
+			correctFields = false;
+		} else {
+			txtZip.setStyle("");
+		}
+		
+		if(correctFields){
+			// Only goes through if onlyNumbers stayed true
+			Customer customer = new Customer();
+			customer.setcity(txtCity.getText());
+			customer.setStreet(txtStreet.getText());
+			customer.setState(cboState.getValue().toString());
+			customer.setZip(txtZip.getText());
+			customer.setDOB(java.sql.Date.valueOf(dpDOB.getValue()));
+			customer.setEmail(txtEmail.getText());
+			customer.setFirstName(txtFirstName.getText());
+			customer.setLastName(txtLastName.getText());
+			customer.setPassword(HashPassword.hashPassword(txtPassword.getText()));
+			customer.setUserName(txtUsername.getText());
+			customer.setPhone(txtPhoneNumber.getText());
+			customer.setSSN(txtSocialSecurityNumber.getText());
+			
+			// Send in customer to register
+			Connect conn = new Connect();
+			conn.initalizeDB();
+			System.out.println("Sending in customer");
+			conn.register(customer);
+			conn.closeDB();
+			//MasterPaneController.userMap.put(customer.getUserName(), customer);
+			// Send it back to the log in scene
+			try{
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(LogInController.class.getResource("LogInScene.fxml"));
+				LogIinLayout = (AnchorPane) loader.load();
+				MasterPaneController.masterLayout.setCenter(LogIinLayout);
+				
+			}catch (IOException ex){
+				ex.printStackTrace();
 			}
-			if(txtLastName.getText().equals("")){
-				txtLastName.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtLastName.setStyle("");
-			}
-			if(txtPhoneNumber.getText().equals("")){
-				txtPhoneNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtPhoneNumber.setStyle("");
-			}
-			if(txtEmail.getText().equals("")){
-				txtEmail.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtEmail.setStyle("");
-			}
-			if(dpDOB.getValue() == null){
-				dpDOB.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				dpDOB.setStyle("");
-			}
-			if(txtSocialSecurityNumber.getText().equals("")){
-				txtSocialSecurityNumber.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtSocialSecurityNumber.setStyle("");
-			}
-			if(txtUsername.getText().equals("")){
-				txtUsername.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtUsername.setStyle("");
-			}
-			if(txtPassword.getText().equals("")){
-				txtPassword.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtPassword.setStyle("");
-			}
-			if(txtStreet.getText().equals("")){
-				txtStreet.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtStreet.setStyle("");
-			}
-			if(txtCity.getText().equals("")){
-				txtCity.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtCity.setStyle("");
-			}
-			if(cboState.getSelectionModel().isEmpty()){
-				cboState.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				cboState.setStyle("");
-			}
-			if(txtZip.getText().equals("")){
-				txtZip.setStyle("-fx-background-color: #FFF0F0; -fx-prompt-text-fill: red");
-			} else {
-				txtZip.setStyle("");
-			}
+		} else {
+			showAlert();
 		}
 	} 
+	public void showAlert(){
+		// Show alert
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+	    alert.setTitle("Error");
+	    alert.setHeaderText(" Error");
+	    alert.setContentText("Please fill out the selected values");
+	    alert.showAndWait();
+	}
 	
 	@FXML
 	public void miCloseAction(ActionEvent e){
