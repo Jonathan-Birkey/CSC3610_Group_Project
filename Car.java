@@ -5,7 +5,7 @@ public class Car {
 	String color;
 	String model;
 	int year;
-	int sizeOfWheels;
+	String sizeOfWheels;
 	String interiorType;
 	double price;
 	String subModel;
@@ -16,12 +16,12 @@ public class Car {
 		year = 2017;
 		model = "Model S";
 		subModel = "75";
-		sizeOfWheels = 20;
+		sizeOfWheels = "20";
 		interiorType = "Black";
 		price = 75000.00;
 	}
 	// Constructor to be used with parameters
-	public Car(String color, String model, int year, int sizeOfWheels, String interiorType,
+	public Car(String color, String model, int year, String sizeOfWheels, String interiorType,
 			double price, String subModel) {
 		super();
 		this.color = color;
@@ -51,10 +51,10 @@ public class Car {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public int getSizeOfWheels() {
+	public String getSizeOfWheels() {
 		return sizeOfWheels;
 	}
-	public void setSizeOfWheels(int sizeOfWheels) {
+	public void setSizeOfWheels(String sizeOfWheels) {
 		this.sizeOfWheels = sizeOfWheels;
 	}
 	public String getInteriorType() {

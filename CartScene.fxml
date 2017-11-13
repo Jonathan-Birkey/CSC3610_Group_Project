@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.CartSceneController">
+<AnchorPane prefHeight="550.0" prefWidth="550.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.CartSceneController">
    <children>
       <VBox prefHeight="550.0" prefWidth="550.0">
          <children>
@@ -45,19 +44,19 @@
                   <Label text="Color" GridPane.rowIndex="1" />
                   <Label text="Interior:" GridPane.rowIndex="2" />
                   <Label text="Wheels:" GridPane.rowIndex="3" />
-                  <Label text="Top:" GridPane.rowIndex="4" />
+                  <Label text="Roof:" GridPane.rowIndex="4" />
                   <Label text="Total Price:" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.columnIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                  <Label text="Label" GridPane.columnIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <Label fx:id="lblModel" text="Label" GridPane.columnIndex="1" />
+                  <Label fx:id="lblColor" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="lblInterior" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="lblWheels" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="lblRoof" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="lblTotal" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label fx:id="lblModelPrice" text="Label" GridPane.columnIndex="2" />
+                  <Label fx:id="lblColorPrice" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="lblInteriorPrice" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="lblWheelsPrice" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="lblRoofPrice" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                </children>
                <VBox.margin>
                   <Insets left="100.0" right="100.0" top="10.0" />

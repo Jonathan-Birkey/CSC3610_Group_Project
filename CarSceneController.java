@@ -111,7 +111,8 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceColor = hMap.get(t1);
-				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
+				price = price + priceRoof + priceWheels + priceInterior + priceColor;
+				lblPrice.setText(format.format(price));
 
 				// change picture as the user picks the color
 				switch (t1) {
@@ -139,7 +140,8 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceInterior = hMap.get(t1);
-				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
+				price = price + priceRoof + priceWheels + priceInterior + priceColor;
+				lblPrice.setText(format.format(price));
 
 				// change picture as the user picks the interior color
 				switch (t1) {
@@ -176,7 +178,8 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceRoof = hMap.get(t1);
-				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
+				price = price + priceRoof + priceWheels + priceInterior + priceColor;
+				lblPrice.setText(format.format(price));
 			}
 		});
 	}
@@ -188,6 +191,9 @@ public class CarSceneController extends Application {
 		btnP100D.setStyle("-fx-background-color: #ffffff");
 		price = 75000.0;
 		battery = "75D";
+		NumberFormat format = NumberFormat.getCurrencyInstance();
+		price = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price));
 	}
 
 	@FXML
@@ -197,6 +203,9 @@ public class CarSceneController extends Application {
 		btnP100D.setStyle("-fx-background-color: #ffffff");
 		price = 98500.0;
 		battery = "100D";
+		NumberFormat format = NumberFormat.getCurrencyInstance();
+		price = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price));
 	}
 
 	@FXML
@@ -206,6 +215,9 @@ public class CarSceneController extends Application {
 		btn75D.setStyle("-fx-background-color: #ffffff");
 		price = 136000.0;
 		battery = "P100D";
+		NumberFormat format = NumberFormat.getCurrencyInstance();
+		price = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price));
 	}
 
 	@FXML
@@ -220,6 +232,22 @@ public class CarSceneController extends Application {
 		MasterPaneController.masterLayout.setCenter(userLayout);
 	}
 
+	@FXML
+	public void btnCart(ActionEvent e) {
+		Car car = new Car(cboColor.getValue(), "Model S", 2018, cboWheels.getValue(), cboInterior.getValue(),price, battery);
+		CartSceneController.customizedCar = car;
+		FXMLLoader userLoader = new FXMLLoader();
+		userLoader.setLocation(LogInController.class.getResource("CartScene.fxml"));
+		try {
+			userLayout = (AnchorPane) userLoader.load();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		MasterPaneController.masterLayout.setCenter(userLayout);
+		
+		System.out.println(car);
+	}
+	
 	@Override
 	public void start(Stage arg0) throws Exception {
 	}
