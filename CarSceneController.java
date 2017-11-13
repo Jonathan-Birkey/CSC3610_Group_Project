@@ -1,14 +1,8 @@
 package CSC3610_Group_Project;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.text.NumberFormat;
-import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -18,11 +12,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -32,8 +24,7 @@ public class CarSceneController extends Application {
 
 	public static Person loggedInUser;
 
-	private Stage primaryStage;
-	private AnchorPane controlsData;
+	
 	private AnchorPane userLayout;
 
 	@FXML

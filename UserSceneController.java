@@ -85,6 +85,18 @@ public class UserSceneController extends Application {
 			MasterPaneController.masterLayout.setCenter(userLayout);
 	 }
 	 @FXML
+	 public void getSales(ActionEvent e){	
+			FXMLLoader userLoader = new FXMLLoader();
+			userLoader.setLocation(LogInController.class.getResource("ReportsScene.fxml"));
+			try {
+				userLayout = (AnchorPane) userLoader.load();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
+			MasterPaneController.masterLayout.setCenter(userLayout);
+	 }
+	 @FXML
 	 public void btnProfile(ActionEvent e){	
 			FXMLLoader userinfoLoader = new FXMLLoader();
 			userinfoLoader.setLocation(UserInforamtionController.class.getResource("UserScene.fxml"));

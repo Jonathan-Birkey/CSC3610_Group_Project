@@ -1,6 +1,7 @@
 package CSC3610_Group_Project;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -33,7 +34,9 @@ public class CartSceneController extends Application{
 		lblWheelsPrice.setText(customizedCar.getModel());
 		lblRoof.setText(customizedCar.getModel());
 		lblRoofPrice.setText(customizedCar.getModel());
-		lblTotal.setText(String.valueOf(customizedCar.getPrice()));
+		
+		NumberFormat format = NumberFormat.getCurrencyInstance();
+		lblTotal.setText(String.valueOf(format.format(customizedCar.getPrice())));
 		
 		System.out.println(customizedCar);
 	}

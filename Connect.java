@@ -4,6 +4,8 @@ package CSC3610_Group_Project;
 import java.sql.*;
 import java.util.GregorianCalendar;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 public class Connect {
@@ -166,37 +168,31 @@ public class Connect {
 			}
 		}			
 			
+	public ObservableList getTableData() {
+		ObservableList data = FXCollections.observableArrayList();
+		
+		//SQL FOR SELECTING ALL OF CUSTOMER
+        String SQL = "SELECT * from transaction";
+        //ResultSet
+        try {
+			ResultSet rs = connection.createStatement().executeQuery(SQL);
+			while(rs.next()){
+                //Iterate Row
+                ObservableList<String> row = FXCollections.observableArrayList();
+                for(int i=1 ; i<=rs.getMetaData().getColumnCount(); i++){
+                    //Iterate Column
+                    row.add(rs.getString(i));
+                }
+                System.out.println("Row added "+row );
+                data.add(row);
 
-				// Create customer object
-/*				public Person updatePerson(String loggedInUser){
-					String username = loggedInUser;
-					String query = "UPDATE user SET (firstName, lastName, phone, email, street, city, state, zip, userName, password, DOB, ssn) values (?,?,?,?,?,?,?,?,?,?,?,?);"
-										+ " WHERE username = "+ username;
-					Person person1 = new Person();
-					try {
-						Statement stmt = connection.createStatement();
-						ResultSet rs1 = stmt.executeQuery(query);
-						if(rs1.next()){
-							person1.setFirstName(rs1.getString(1));
-							person1.setLastName(rs1.getString(2));
-							person1.setPhone(rs1.getString(3));
-							person1.setEmail(rs1.getString(4));
-							person1.setStreet(rs1.getString(5));
-							person1.setcity(rs1.getString(6));
-							person1.setState(rs1.getString(7));
-							person1.setZip(rs1.getString(8));
-							person1.setUserName(rs1.getString(9));
-							person1.setPassword(rs1.getString(10));
-							person1.setDOB(rs1.getDate(11));
-							person1.setSSN(rs1.getString(12));
-							
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					return person1;
-*/				
-
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
 	// Close the database
 	public void closeDB() {
 		try {
