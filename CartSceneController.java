@@ -1,6 +1,7 @@
 package CSC3610_Group_Project;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.text.NumberFormat;
 
 import javafx.application.Application;
@@ -13,15 +14,41 @@ import javafx.stage.Stage;
 
 
 public class CartSceneController extends Application{
-
+	// Variables
 	private Stage primaryStage;
 	private AnchorPane rootLayout;
 	public static Car customizedCar;
-	
+	private AnchorPane userLayout;
+	// Labels from fxml
 	@FXML
 	private Label lblModel, lblModelPrice, lblColor, lblColorPrice, lblInterior, lblInteriorPrice, 
 	lblWheels, lblWheelsPrice, lblRoof, lblRoofPrice, lblTotal;
 	
+	// This happens when you press the Order button
+	@FXML
+	private void purchase() {
+		// Create a transaction object to send into the database
+		Transaction transaction = new Transaction(UserSceneController.loggedInUser.getFirstName() + " " + UserSceneController.loggedInUser.getLastName(),
+				customizedCar, new Date(0));
+		
+//		System.out.println(transaction);
+		Connect conn = new Connect();
+		conn.initalizeDB();
+		conn.addTransaction(transaction);
+		conn.closeDB();
+		// Try to load the user scene
+		try{
+			FXMLLoader userLoader = new FXMLLoader();
+			userLoader.setLocation(LogInController.class.getResource("HomeScene.fxml"));
+			userLayout = (AnchorPane) userLoader.load();
+			
+			MasterPaneController.masterLayout.setCenter(userLayout);
+
+		}catch (IOException ex){
+			ex.printStackTrace();
+		}
+	}
+	// Set up the labels to reflect what your car options were
 	@FXML 
 	private void initialize (){
 		lblModel.setText(customizedCar.getModel());

@@ -71,7 +71,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" prefWidth="60.0" text="Order" />
+                  <Button mnemonicParsing="false" onAction="#purchase" prefWidth="60.0" text="Order" />
                   <Button mnemonicParsing="false" prefWidth="60.0" text="Edit" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
