@@ -180,6 +180,7 @@ public class CarSceneController extends Application {
 		btn75D.setStyle("-fx-background-color: #c2c2c2");
 		btn100D.setStyle("-fx-background-color: #ffffff");
 		btnP100D.setStyle("-fx-background-color: #ffffff");
+		
 		price = 75000.0;
 		battery = "75D";
 		NumberFormat format = NumberFormat.getCurrencyInstance();
