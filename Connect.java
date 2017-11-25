@@ -4,6 +4,8 @@ package CSC3610_Group_Project;
 import java.sql.*;
 import java.util.GregorianCalendar;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 
 public class Connect {
@@ -130,73 +132,98 @@ public class Connect {
 		}
 	}
 	
-		//Update User action
-		public void updateUser(Customer person1) {
-			// Prepare the statement by setting the strings equal to the various getter methods
-			try {
+	//Update User action
+	public void updateUser(Customer person1) {
+		// Prepare the statement by setting the strings equal to the various getter methods
+		try {
 
-				String query = "UPDATE user SET firstName = ?, lastName = ?, phone = ?, email = ?, street = ?, city = ?, state = ?, zip = ?, password  = ?, DOB = ?, ssn = ? "
-									+ "WHERE userName = ?";
+			String query = "UPDATE user SET firstName = ?, lastName = ?, phone = ?, email = ?, street = ?, city = ?, state = ?, zip = ?, password  = ?, DOB = ?, ssn = ? "
+								+ "WHERE userName = ?";
 
-				PreparedStatement preparedStatement = connection.prepareStatement(query);
-				
-				
-				System.out.print(person1);
-				preparedStatement.setString(1, person1.getFirstName());
-				preparedStatement.setString(2, person1.getLastName());
-				preparedStatement.setString(3, person1.getPhone());
-				preparedStatement.setString(4, person1.getEmail());
-				preparedStatement.setString(5, person1.getStreet());
-				preparedStatement.setString(6, person1.getcity());
-				preparedStatement.setString(7, person1.getState());
-				preparedStatement.setString(8, person1.getZip());
-				preparedStatement.setString(12, person1.getUserName());
-				preparedStatement.setString(9, person1.getPassword());
-				preparedStatement.setDate(10, person1.getDOB(), new GregorianCalendar() );
-				preparedStatement.setString(11, person1.getSSN());
-				
-
-				// Execute the query
-				preparedStatement.execute();
-				// This only prints out when a customer is fully added.  Delete this line later
-				System.out.println("Customer Updated");
-			} catch (SQLException e) {
-				// This exception will only happen if a SQL error occurs
-				e.printStackTrace();
-			}
-		}			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			
+			
+			System.out.print(person1);
+			preparedStatement.setString(1, person1.getFirstName());
+			preparedStatement.setString(2, person1.getLastName());
+			preparedStatement.setString(3, person1.getPhone());
+			preparedStatement.setString(4, person1.getEmail());
+			preparedStatement.setString(5, person1.getStreet());
+			preparedStatement.setString(6, person1.getcity());
+			preparedStatement.setString(7, person1.getState());
+			preparedStatement.setString(8, person1.getZip());
+			preparedStatement.setString(12, person1.getUserName());
+			preparedStatement.setString(9, person1.getPassword());
+			preparedStatement.setDate(10, person1.getDOB(), new GregorianCalendar() );
+			preparedStatement.setString(11, person1.getSSN());
 			
 
-				// Create customer object
-/*				public Person updatePerson(String loggedInUser){
-					String username = loggedInUser;
-					String query = "UPDATE user SET (firstName, lastName, phone, email, street, city, state, zip, userName, password, DOB, ssn) values (?,?,?,?,?,?,?,?,?,?,?,?);"
-										+ " WHERE username = "+ username;
-					Person person1 = new Person();
-					try {
-						Statement stmt = connection.createStatement();
-						ResultSet rs1 = stmt.executeQuery(query);
-						if(rs1.next()){
-							person1.setFirstName(rs1.getString(1));
-							person1.setLastName(rs1.getString(2));
-							person1.setPhone(rs1.getString(3));
-							person1.setEmail(rs1.getString(4));
-							person1.setStreet(rs1.getString(5));
-							person1.setcity(rs1.getString(6));
-							person1.setState(rs1.getString(7));
-							person1.setZip(rs1.getString(8));
-							person1.setUserName(rs1.getString(9));
-							person1.setPassword(rs1.getString(10));
-							person1.setDOB(rs1.getDate(11));
-							person1.setSSN(rs1.getString(12));
-							
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					return person1;
-*/				
+			// Execute the query
+			preparedStatement.execute();
+			// This only prints out when a customer is fully added.  Delete this line later
+			System.out.println("Customer Updated");
+		} catch (SQLException e) {
+			// This exception will only happen if a SQL error occurs
+			e.printStackTrace();
+		}
+	}			
+	// Add a transaction to the database
+	public void addTransaction(Transaction transaction) {
+		// Will take in a customer object and create a prepared statement
+		String query = "insert into transaction (name, model, submodel, color, date_bought, price) values (?,?,?,?,?,?);";
+		// Prepare the statement by setting the strings equal to the various getter methods
+		try {
+			
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, transaction.getCust_name());
+			preparedStatement.setString(2, transaction.getCustomized_car().getModel());
+			preparedStatement.setString(3, transaction.getCustomized_car().getSubModel());
+			preparedStatement.setString(4, transaction.getCustomized_car().getColor());
+			preparedStatement.setDate(5, transaction.getDate_bought(), new GregorianCalendar());
+			preparedStatement.setDouble(6, transaction.getCustomized_car().getPrice());
+			
+			// Execute the query
+			preparedStatement.execute();
+			// This only prints out when a customer is fully added.  Delete this line later
+			System.out.println("Transaction added");
+		} catch (SQLException e) {
+			// This exception will only happen if a SQL error occurs
+			e.printStackTrace();
+		}
+	}
+	public ObservableList<TransactionTable> getTableData() {
+		ObservableList<TransactionTable> data = FXCollections.observableArrayList();
+		
+		//SQL FOR SELECTING ALL OF CUSTOMER
+        String SQL = "SELECT * from transaction";
+        //ResultSet
+        try {
+			ResultSet rs = connection.createStatement().executeQuery(SQL);
+			while(rs.next()){
+				TransactionTable transaction = new TransactionTable();
+               
+                //Iterate Column
+            	transaction.id.set(rs.getInt("id"));
+                transaction.name.set(rs.getString("name"));
+                transaction.model.set(rs.getString("model"));
+                transaction.submodel.set(rs.getString("submodel"));
+                transaction.color.set(rs.getString("color"));
+                transaction.date_bought.set(rs.getDate("date_bought"));
+                transaction.price.set(rs.getDouble("price"));
+                System.out.println("Row added "+ transaction );
+                data.add(transaction);
+                
+                
 
+            }
+			
+			TeslaQuickSort.quickSort(data);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
 	// Close the database
 	public void closeDB() {
 		try {

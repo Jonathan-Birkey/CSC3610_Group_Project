@@ -1,78 +1,47 @@
 package CSC3610_Group_Project;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Transaction {
-	// Set variables for dates and other things
-	private Date datePurchased;
-	private Date dateShipped;
-	private Date dateDelivered;
-	private boolean orderConfirmation;
-	private double price;
-	
-	// Default constructor, not exaclty sure if this will ever be used
-	public Transaction(){
+	// Transaction variables
+	private String cust_name;
+	private Car customized_car;
+	private Date date_bought;
+	// Default constructor
+	public Transaction() {
 		
 	}
-	// Constructor with full parameters
-	public Transaction(Date datePurchased, Date dateShipped, Date dateDelivered, boolean orderConfirmation,
-			double price) {
-		this.datePurchased = datePurchased;
-		this.dateShipped = dateShipped;
-		this.dateDelivered = dateDelivered;
-		this.orderConfirmation = orderConfirmation;
-		this.price = price;
-	}
-	// Constructor to be used for first purchase
-	public Transaction(Date datePurchased, double price) {
-		this.datePurchased = datePurchased;
-		this.price = price;
-	}
-	// Getters/Setters
-	public Date getDatePurchased() {
-		return datePurchased;
+	// Constructor with parameters
+	public Transaction(String cust_name, Car customized_car, Date date_bought) {
+	
+		this.cust_name = cust_name;
+		this.customized_car = customized_car;
+		this.date_bought = date_bought;
 	}
 
-	public void setDatePurchased(Date datePurchased) {
-		this.datePurchased = datePurchased;
+	// Getters and setters
+	public String getCust_name() {
+		return cust_name;
 	}
-
-	public Date getDateShipped() {
-		return dateShipped;
+	public void setCust_name(String cust_name) {
+		this.cust_name = cust_name;
 	}
-
-	public void setDateShipped(Date dateShipped) {
-		this.dateShipped = dateShipped;
+	public Car getCustomized_car() {
+		return customized_car;
 	}
-
-	public Date getDateDelivered() {
-		return dateDelivered;
+	public void setCustomized_car(Car customized_car) {
+		this.customized_car = customized_car;
 	}
-
-	public void setDateDelivered(Date dateDelivered) {
-		this.dateDelivered = dateDelivered;
+	public Date getDate_bought() {
+		return date_bought;
 	}
-
-	public boolean isOrderConfirmation() {
-		return orderConfirmation;
+	public void setDate_bought(Date date_bought) {
+		this.date_bought = date_bought;
 	}
-
-	public void setOrderConfirmation(boolean orderConfirmation) {
-		this.orderConfirmation = orderConfirmation;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-	// Overriden toString Method
 	@Override
 	public String toString() {
-		return "Transaction [datePurchased=" + datePurchased + ", dateShipped=" + dateShipped + ", dateDelivered="
-				+ dateDelivered + ", orderConfirmation=" + orderConfirmation + ", price=" + price + "]";
+		return "Transaction [cust_name=" + cust_name + ", customized_car=" + customized_car
+				+ ", date_bought=" + date_bought + "]";
 	}
 	
 	
