@@ -2,17 +2,28 @@ package CSC3610_Group_Project;
 
 import java.io.IOException;
 import java.sql.Date;
+<<<<<<< HEAD
+=======
+import java.text.NumberFormat;
+
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+>>>>>>> origin/Car-Class
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+<<<<<<< HEAD
 import javafx.scene.control.Alert;
+=======
+>>>>>>> origin/Car-Class
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+<<<<<<< HEAD
 
 public class ReportsController {
 
@@ -42,6 +53,24 @@ public class ReportsController {
     private TableColumn<TransactionTable, Double> col_price;
     
     
+=======
+import javafx.stage.Stage;
+
+public class ReportsController {
+
+	@FXML Button btnBack;
+	@FXML TextField txtSearch;
+	private AnchorPane userLayout;
+	private ObservableList<TransactionTable> data;
+    @FXML private TableView<TransactionTable> salesTable;
+    @FXML private TableColumn<TransactionTable, Integer> col_id;
+    @FXML private TableColumn<TransactionTable, String> col_name;
+    @FXML private TableColumn<TransactionTable, String> col_model;
+    @FXML private TableColumn<TransactionTable, String> col_submodel;
+    @FXML private TableColumn<TransactionTable, String> col_color;
+    @FXML private TableColumn<TransactionTable, Date> col_date_bought;
+    @FXML private TableColumn<TransactionTable, Double> col_price;
+>>>>>>> origin/Car-Class
 	@FXML
 	private void initialize() {
 		
@@ -67,7 +96,10 @@ public class ReportsController {
         salesTable.setItems(data);
 
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/Car-Class
 	@FXML
 	public void goBack(ActionEvent e) {
 		FXMLLoader userLoader = new FXMLLoader();
@@ -81,6 +113,7 @@ public class ReportsController {
 		MasterPaneController.masterLayout.setCenter(userLayout);
 	}
 	
+<<<<<<< HEAD
 	@FXML
 	public void btnSearchAction(ActionEvent e){
 		 if(TeslaBinarySearch.binarySearch(data, Double.parseDouble(txtSearch.getText())) != null) {
@@ -102,4 +135,6 @@ public class ReportsController {
    	  }
 	}
 	
+=======
+>>>>>>> origin/Car-Class
 }

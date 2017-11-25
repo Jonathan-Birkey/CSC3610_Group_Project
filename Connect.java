@@ -210,6 +210,7 @@ public class Connect {
                 transaction.color.set(rs.getString("color"));
                 transaction.date_bought.set(rs.getDate("date_bought"));
                 transaction.price.set(rs.getDouble("price"));
+<<<<<<< HEAD
                 System.out.println("Row added "+ transaction );
                 data.add(transaction);
                 
@@ -218,6 +219,13 @@ public class Connect {
             }
 			
 			TeslaQuickSort.quickSort(data);
+=======
+               
+                System.out.println("Row added "+ transaction );
+                data.add(transaction);
+
+            }
+>>>>>>> origin/Car-Class
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
