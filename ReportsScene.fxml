@@ -34,6 +34,7 @@
           </TableColumn>
         </columns>
       </TableView>
-      <TextField fx:id="txtSearch" layoutX="349.0" layoutY="49.0" promptText="Search " />
+      <TextField fx:id="txtSearch" layoutX="108.0" layoutY="478.0" promptText="Price Search" />
+      <Button fx:id="btnSearch" layoutX="283.0" layoutY="478.0" mnemonicParsing="false" onAction="#btnSearchAction" text="Search" />
    </children>
 </AnchorPane>
