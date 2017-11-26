@@ -77,6 +77,7 @@ public class CarSceneController extends Application {
 		cboWheels.setItems(wheelList);
 		cboRoof.setItems(roofList);
 		carPicture.setImage(new Image("CSC3610_Group_Project/modelSGray.png"));
+		cboColor.setValue("Black");
 
 		// populate the hashMap
 		hMap.put("Black", 0.0);
