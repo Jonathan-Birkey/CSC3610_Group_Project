@@ -227,7 +227,7 @@ public class CarSceneController extends Application {
 
 	@FXML
 	public void btnCart(ActionEvent e) {
-		Car car = new Car(cboColor.getValue(), "Model S", 2018, cboWheels.getValue(), cboInterior.getValue(),price, battery);
+		Car car = new Car(cboColor.getValue(), "Model S", 2018, cboWheels.getValue(), cboInterior.getValue(),price, battery, cboRoof.getValue());
 		CartSceneController.customizedCar = car;
 		FXMLLoader userLoader = new FXMLLoader();
 		userLoader.setLocation(LogInController.class.getResource("CartScene.fxml"));
