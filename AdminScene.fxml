@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="520.0" prefWidth="540.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.AdminController">
+   <children>
+      <Pane layoutY="5.0" prefHeight="520.0" prefWidth="540.0">
+         <children>
+            <Label layoutX="35.0" layoutY="398.0" text="Username:" />
+            <Label layoutX="289.0" layoutY="398.0" text="Password:" />
+            <TextField fx:id="txtUsername" layoutX="121.0" layoutY="394.0" />
+            <Button fx:id="btnDelete" layoutX="239.0" layoutY="473.0" mnemonicParsing="false" onAction="#btSDeletection" text="Delete" />
+            <Button fx:id="btnSave" layoutX="160.0" layoutY="473.0" mnemonicParsing="false" onAction="#btSaveAction" text="Save" />
+            <Button fx:id="btnBack" layoutX="338.0" layoutY="473.0" mnemonicParsing="false" onAction="#goBack" text="Back" />
+            <PasswordField fx:id="txtPassword" layoutX="367.0" layoutY="394.0" />
+            <TableView fx:id="UserTable" layoutX="1.0" prefHeight="383.0" prefWidth="540.0">
+              <columns>
+                <TableColumn fx:id="FirstName" prefWidth="72.0" text="First Name" />
+                <TableColumn fx:id="LastName" prefWidth="75.0" text="Last Name" />
+                  <TableColumn fx:id="UserName" prefWidth="68.0" text="Username" />
+                  <TableColumn fx:id="Phone" minWidth="22.0" prefWidth="78.0" text="Phone" />
+                  <TableColumn fx:id="Street" prefWidth="72.0" text="Street" />
+                  <TableColumn fx:id="City" minWidth="0.0" prefWidth="72.0" text="City" />
+                  <TableColumn fx:id="State" prefWidth="72.0" text="State" />
+                  <TableColumn fx:id="Zip" prefWidth="72.0" text="Zip" />
+                  <TableColumn fx:id="Email" minWidth="0.0" prefWidth="0.0" text="Email" />
+                  <TableColumn fx:id="DOB" minWidth="40.0" prefWidth="72.0" text="DOB" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
