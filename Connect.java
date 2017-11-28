@@ -71,6 +71,33 @@ public class Connect {
 		}
 		return false;
 	}
+	public boolean validateAdmin(String userName, String password){
+		// Create the query that will be filled in later
+		 String queryString = "select userName, password from user " +
+	    			"where userName = ? ";
+	    			
+		// Create a statement
+		try {
+			// Prepare the statement and set the ? to the username
+			preparedStatement = connection.prepareStatement(queryString);
+			preparedStatement.setString(1, "admin");
+		    ResultSet rset = preparedStatement.executeQuery();
+		    // Once user is found, check the password
+		    if (rset.next()) {
+		    		System.out.println("Checking password");
+		    	  if(rset.getString(2).equals(password)) {
+		    		  // Only return true if the password is the same
+		    		  return true;
+		    	  } 
+		    } 
+		    else {
+		    }
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 	// Create customer object
 	public Person createPerson(String loggedInUser){
 		String username = loggedInUser;
