@@ -38,4 +38,4 @@ CREATE TABLE User(
 
 
 INSERT INTO Car VALUES ('12345','Black','P150D',2017,'22.0','Leather','30000.00','P150D');
-INSERT INTO User VALUES ('Kyle','Grondin','6305555555','test@example.com','123 Fake St', 'Fake City', 'IL', '60506', 'admin','password','1994-04-01','123456789');
+INSERT INTO User VALUES('Tesla', 'Employee', ' (877) 798-3752', 'tesla@email.com', '34 California', 'San Diego', 'CA', '90098', 'admin', 'e8495ccc7ac555689669bb77d44d023c766bc8c', '2017-01-20', '09000000');
