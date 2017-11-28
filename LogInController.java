@@ -81,9 +81,28 @@ public class LogInController extends Application{
 		conn.initalizeDB();
 		userName = txtUsername.getText();
 		
-		String password = HashPassword.hashPassword(txtPassword.getText());
+		String password = HashPassword.hashPassword(txtPassword.getText());		
+		//validate if admin
+		if(conn.validateAdmin(userName, password)) {
+			
+		// Set a fake "cookie" as loggedInUser that will be used later
+		Person loggedInUser = conn.createPerson(userName);
+		System.out.println("Welcome, " + loggedInUser.getFirstName() + "!");
+		// Try to load the user scene
+		try{
+			UserSceneController.loggedInUser = loggedInUser;
+			FXMLLoader userLoader = new FXMLLoader();
+			userLoader.setLocation(LogInController.class.getResource("AdminScene.fxml"));
+			adminLayout = (AnchorPane) userLoader.load();
+						
+			MasterPaneController.masterLayout.setCenter(adminLayout);
+					
+					}catch (IOException ex){
+						ex.printStackTrace();
+					}
+		}
 		// If validate returns true, that means that the user is found in the database and their password is correct
-		if(conn.validate(userName,password)) {
+		else if(conn.validate(userName,password)) {
 			// Set a fake "cookie" as loggedInUser that will be used later
 			Person loggedInUser = conn.createPerson(userName);
 			System.out.println("Welcome, " + loggedInUser.getFirstName() + "!");
@@ -122,4 +141,6 @@ public class LogInController extends Application{
 }
 	
 	
+}
+
 }
