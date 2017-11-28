@@ -212,18 +212,98 @@ public class Connect {
                 transaction.price.set(rs.getDouble("price"));
                 System.out.println("Row added "+ transaction );
                 data.add(transaction);
-                
-                
-
             }
 			
-			TeslaQuickSort.quickSort(data);
+		TeslaQuickSort.quickSort(data);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		return data;
 	}
+	
+	public ObservableList<UserTable> getUserData() {
+		ObservableList<UserTable> user = FXCollections.observableArrayList();
+		
+		//SQL FOR SELECTING ALL OF CUSTOMER
+        String SQL = "sELECT * from user";
+        //ResultSet
+        try {
+		ResultSet rs = connection.createStatement().executeQuery(SQL);
+		while(rs.next()){
+			UserTable userData = new UserTable();
+               
+                //Iterate Column
+		userData.firstName.set(rs.getString("firstName"));
+		userData.lastName.set(rs.getString("lastName"));
+                userData.phone.set(rs.getString("phone"));
+                userData.email.set(rs.getString("email"));
+                userData.street.set(rs.getString("Street"));
+                userData.city.set(rs.getString("city"));
+                userData.state.set(rs.getString("state"));
+                userData.zip.set(rs.getInt("zip"));
+                userData.userName.set(rs.getString("userName"));
+                userData.SSN.set(rs.getString("ssn"));
+                userData.DOB.set(rs.getString("DOB"));
+               
+                
+                System.out.println("User Displayed");
+                user.add(userData);
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	//admin
+	//Update User password action
+		public void updateUserPassword(Customer person1) {
+			// Prepare the statement by setting the strings equal to the various getter methods
+			try {
+
+				String query = "UPDATE user SET password  = ?"
+									+ "WHERE userName = ?";
+
+				PreparedStatement preparedStatement = connection.prepareStatement(query);
+				System.out.print(person1);
+			
+				preparedStatement.setString(2, person1.getUserName());
+				preparedStatement.setString(1, person1.getPassword());
+
+				// Execute the query
+				preparedStatement.execute();
+				// This only prints out when a customer is fully added.  Delete this line later
+				System.out.println("Customer Updated");
+			} catch (SQLException e) {
+				// This exception will only happen if a SQL error occurs
+				e.printStackTrace();
+			}
+		}	
+		
+		//Delete User action
+		public void deleteUser(Customer person1) {
+			// Prepare the statement by setting the strings equal to the various getter methods
+				try {
+					String query = "DELETE FROM user WHERE userName = ?";
+
+					PreparedStatement preparedStatement = connection.prepareStatement(query);
+					System.out.print(person1);
+					preparedStatement.setString(1, person1.getUserName());
+
+					// Execute the query
+					preparedStatement.execute();
+					// This only prints out when a customer is fully added.  Delete this line later
+					System.out.println("Customer Updated");
+		}
+				
+				catch (SQLException e) {
+					// This exception will only happen if a SQL error occurs
+					e.printStackTrace();
+				}
+			}	
+
 	// Close the database
 	public void closeDB() {
 		try {
