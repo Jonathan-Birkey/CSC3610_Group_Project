@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -15,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.UserSceneController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="550.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CSC3610_Group_Project.UserSceneController">
    <children>
       <ImageView fitHeight="599.0" fitWidth="938.0" layoutX="-24.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -33,15 +26,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnProfile" layoutX="380.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnProfile" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Profile">
+      <Button fx:id="btnProfile" layoutX="463.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnProfile" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Profile">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="btnCart" layoutX="470.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnCart" prefHeight="42.0" prefWidth="73.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Cart">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="btnSales" layoutX="249.0" layoutY="14.0" mnemonicParsing="false" onAction="#getSales" prefHeight="42.0" prefWidth="114.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Sales Report">
+      <Button fx:id="btnSales" layoutX="331.0" layoutY="14.0" mnemonicParsing="false" onAction="#getSales" prefHeight="42.0" prefWidth="114.0" style="-fx-background-color: white; -fx-opacity: 100;" text="Sales Report">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
