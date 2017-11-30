@@ -24,8 +24,6 @@ public class UserSceneController extends Application {
 	private AnchorPane controlsData;
 	private AnchorPane userLayout;
 	private AnchorPane infoLayout;
-	private AnchorPane cartLayout;
-	
 	
 	@FXML
 	private Button btnCart;
@@ -107,18 +105,5 @@ public class UserSceneController extends Application {
 			}
 			
 			MasterPaneController.masterLayout.setCenter(infoLayout);
-	 }
-	 
-	 @FXML
-	 public void btnCart(ActionEvent e){	
-			FXMLLoader cartLoader = new FXMLLoader();
-			cartLoader.setLocation(CartSceneController.class.getResource("CartScene.fxml"));
-			try {
-				cartLayout = (AnchorPane) cartLoader.load();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			
-			MasterPaneController.masterLayout.setCenter(cartLayout);
 	 }
 }
