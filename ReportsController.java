@@ -91,8 +91,6 @@ public class ReportsController {
 			    alert.showAndWait();
    		  System.err.println("Found");
    	  } else {
-   		  // This is where the incorrect password alert should pop up
-   		//Alert User of missing fields
 				Alert alert = new Alert(Alert.AlertType.ERROR);
 			    alert.setTitle("WAS NOT FOUND");
 			    alert.setHeaderText(" WAS NOT FOUND");

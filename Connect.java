@@ -2,7 +2,11 @@
 package CSC3610_Group_Project;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Stack;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +15,15 @@ import javafx.scene.control.Alert;
 public class Connect {
 	Connection connection;
 	PreparedStatement preparedStatement;
+	//List (ArrayList)
+	List<TransactionTable> list = new ArrayList<>();
+	//Stack (Stack)
+	Stack<TransactionTable> stack = new Stack<>();	
+	//Queue (PriorityQueue)
+	PriorityQueue<TransactionTable> queue = new PriorityQueue<>();
+	
+	
+	
 	// Start the database.  Run this method everytime you need to connect to it
 	public void initalizeDB(){
 		try {
@@ -228,7 +241,7 @@ public class Connect {
 			ResultSet rs = connection.createStatement().executeQuery(SQL);
 			while(rs.next()){
 				TransactionTable transaction = new TransactionTable();
-               
+
                 //Iterate Column
             	transaction.id.set(rs.getInt("id"));
                 transaction.name.set(rs.getString("name"));
@@ -239,9 +252,48 @@ public class Connect {
                 transaction.price.set(rs.getDouble("price"));
                 System.out.println("Row added "+ transaction );
                 data.add(transaction);
+<<<<<<< Updated upstream
             }
 			
 		TeslaQuickSort.quickSort(data);
+=======
+                
+				//List (ArrayList)
+				list.add(transaction);
+				
+				//Stack (Stack)
+				stack.push(transaction);
+				
+				//Queue (PriorityQueue)
+				queue.offer(transaction);
+				
+				
+            }
+			
+		//Quick sorting	
+		TeslaQuickSort.quickSort(data);
+		
+		//Print List
+		System.out.println("\nPrinting the list");
+		for(TransactionTable tt: list)
+			System.out.println(tt.toString());
+		
+		//Print Stack
+		System.out.println("\nPrinting the stack");
+		while(!stack.isEmpty()){
+			System.out.println(stack.pop().toString());
+		}
+		
+		
+		System.out.println("\nPrinting the PriorityQueue");
+		for(int i = 0; i < queue.size(); i++){
+			System.out.println(queue.poll().toString());
+		}
+		
+		
+		
+		
+>>>>>>> Stashed changes
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
