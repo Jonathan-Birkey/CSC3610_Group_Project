@@ -51,12 +51,12 @@ public class CarSceneController extends Application {
 	private ImageView carPicture;
 
 	private String battery;
-	private double price = 79000.00;
+	private double price = 75000.00;
 	private double priceColor = 0.0;
 	private double priceInterior = 0.0;
 	private double priceWheels = 0.0;
 	private double priceRoof = 0.0;
-	private double priceMods = priceRoof + priceWheels + priceInterior + priceColor;
+	private double totalPrice;
 
 	// pupulate the combo boxes
 	private ObservableList<String> colorList = FXCollections.observableArrayList("Black", "Red", "Silver", "Blue",
@@ -103,8 +103,8 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceColor = hMap.get(t1);
-				price = price + priceRoof + priceWheels + priceInterior + priceColor;
-				lblPrice.setText(format.format(price));
+				totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 
 				// change picture as the user picks the color
 				switch (t1) {
@@ -132,8 +132,8 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceInterior = hMap.get(t1);
-				price = price + priceRoof + priceWheels + priceInterior + priceColor;
-				lblPrice.setText(format.format(price));
+				totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 
 				// change picture as the user picks the interior color
 				switch (t1) {
@@ -161,6 +161,7 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceWheels = hMap.get(t1);
+				totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
 				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 			}
 		});
@@ -170,8 +171,8 @@ public class CarSceneController extends Application {
 			@Override
 			public void changed(ObservableValue ov, String t, String t1) {
 				priceRoof = hMap.get(t1);
-				price = price + priceRoof + priceWheels + priceInterior + priceColor;
-				lblPrice.setText(format.format(price));
+				totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+				lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 			}
 		});
 	}
@@ -185,8 +186,8 @@ public class CarSceneController extends Application {
 		price = 75000.0;
 		battery = "75D";
 		NumberFormat format = NumberFormat.getCurrencyInstance();
-		price = price + priceRoof + priceWheels + priceInterior + priceColor;
-		lblPrice.setText(format.format(price));
+		totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 	}
 
 	@FXML
@@ -197,8 +198,8 @@ public class CarSceneController extends Application {
 		price = 98500.0;
 		battery = "100D";
 		NumberFormat format = NumberFormat.getCurrencyInstance();
-		price = price + priceRoof + priceWheels + priceInterior + priceColor;
-		lblPrice.setText(format.format(price));
+		totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 	}
 
 	@FXML
@@ -209,8 +210,8 @@ public class CarSceneController extends Application {
 		price = 136000.0;
 		battery = "P100D";
 		NumberFormat format = NumberFormat.getCurrencyInstance();
-		price = price + priceRoof + priceWheels + priceInterior + priceColor;
-		lblPrice.setText(format.format(price));
+		totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
 	}
 
 	@FXML
@@ -227,7 +228,7 @@ public class CarSceneController extends Application {
 
 	@FXML
 	public void btnCart(ActionEvent e) {
-		Car car = new Car(cboColor.getValue(), "Model S", 2018, cboWheels.getValue(), cboInterior.getValue(),price, battery, cboRoof.getValue());
+		Car car = new Car(cboColor.getValue(), "Model S", 2018, cboWheels.getValue(), cboInterior.getValue(),totalPrice, battery, cboRoof.getValue());
 		CartSceneController.customizedCar = car;
 		FXMLLoader userLoader = new FXMLLoader();
 		userLoader.setLocation(LogInController.class.getResource("CartScene.fxml"));
