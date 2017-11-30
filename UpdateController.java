@@ -265,7 +265,7 @@ public class UpdateController extends Application{
 			Connect conn = new Connect();
 			conn.initalizeDB();
 			System.out.println("Sending in customer");
-			conn.register(customer);
+			conn.updateUser(customer);
 			conn.closeDB();
 			//MasterPaneController.userMap.put(customer.getUserName(), customer);
 			// Send it back to the log in scene
