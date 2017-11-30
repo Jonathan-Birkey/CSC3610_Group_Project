@@ -33,11 +33,20 @@ public class CartSceneController extends Application{
 		Transaction transaction = new Transaction(UserSceneController.loggedInUser.getFirstName() + " " + UserSceneController.loggedInUser.getLastName(),
 				customizedCar, new Date(0));
 		
-//		System.out.println(transaction);
+		//System.out.println(transaction);
 		Connect conn = new Connect();
 		conn.initalizeDB();
 		conn.addTransaction(transaction);
 		conn.closeDB();
+		
+		//Send email
+		
+		
+		
+		
+		
+		
+		
 		// Try to load the user scene
 		try{
 			FXMLLoader userLoader = new FXMLLoader();

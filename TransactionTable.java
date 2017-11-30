@@ -7,7 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class TransactionTable {
+public class TransactionTable implements Comparable<TransactionTable>{
 	public SimpleIntegerProperty id = new SimpleIntegerProperty();
 	public SimpleStringProperty name = new SimpleStringProperty();
 	public SimpleStringProperty model = new SimpleStringProperty();
@@ -37,7 +37,21 @@ public class TransactionTable {
 	public Double getPrice() {
 		return price.get();
 	}
-	
+
+	@Override
+	public int compareTo(TransactionTable tt) {
+		if(price.doubleValue() > tt.getPrice())
+			return 1;
+		else if(price.doubleValue() < tt.getPrice())
+			return -1;
+		else
+			return 0;
+	}
+	@Override
+	public String toString() {
+		return "TransactionTable [id=" + id + ", name=" + name + ", model=" + model + ", submodel=" + submodel
+				+ ", color=" + color + ", date_bought=" + date_bought + ", price=" + price + "]";
+	}
 	
 
 }

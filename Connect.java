@@ -252,11 +252,6 @@ public class Connect {
                 transaction.price.set(rs.getDouble("price"));
                 System.out.println("Row added "+ transaction );
                 data.add(transaction);
-<<<<<<< Updated upstream
-            }
-			
-		TeslaQuickSort.quickSort(data);
-=======
                 
 				//List (ArrayList)
 				list.add(transaction);
@@ -265,7 +260,7 @@ public class Connect {
 				stack.push(transaction);
 				
 				//Queue (PriorityQueue)
-				queue.offer(transaction);
+				queue.add(transaction);
 				
 				
             }
@@ -293,7 +288,6 @@ public class Connect {
 		
 		
 		
->>>>>>> Stashed changes
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
