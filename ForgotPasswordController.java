@@ -20,6 +20,7 @@ public class ForgotPasswordController extends Application {
 	private AnchorPane registerLayout;
 	private AnchorPane userLayout;
 	private AnchorPane forgotLayout;
+	private AnchorPane adminLayout;
 	protected static String userName;
 	@FXML
 	private TextField txtUsername;
