@@ -2,8 +2,19 @@ package CSC3610_Group_Project;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -28,7 +39,7 @@ public class CartSceneController extends Application{
 	
 	// This happens when you press the Order button
 	@FXML
-	private void purchase() {
+	private void purchase() throws AddressException, SQLException {
 		// Create a transaction object to send into the database
 		Transaction transaction = new Transaction(UserSceneController.loggedInUser.getFirstName() + " " + UserSceneController.loggedInUser.getLastName(),
 				customizedCar, new Date(0));
@@ -37,16 +48,44 @@ public class CartSceneController extends Application{
 		Connect conn = new Connect();
 		conn.initalizeDB();
 		conn.addTransaction(transaction);
-		conn.closeDB();
+
+		final String email = "thefirstgroupcsc3610@gmail.com";
+		final String password = "WeTheBest";
 		
-		//Send email
-		
-		
-		
-		
-		
-		
-		
+		//Value added: sending a confirmation email
+		Properties properties = new Properties();
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.host", "smtp.gmail.com");
+		properties.put("mail.smtp.port", "587");
+			
+		Session session = Session.getInstance(properties, new javax.mail.Authenticator(){
+			protected PasswordAuthentication getPasswordAuthentication(){
+				return new PasswordAuthentication(email, password);
+			}
+		});
+			
+			
+		try{
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("Tesla"));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(conn.getUserEmail()));
+			message.setSubject("Tesla Confirmation");
+						
+					
+			message.setContent("<h:body style=background-color:white,font-family:verdana; color:#002>"
+					+ "Congratulations on your order:<br/>"
+					+ conn.getUserTransaction() + "<br/>"
+					+ "</body>", 
+					"text/html; charset=utf-8");
+			Transport.send(message);
+			System.out.println("Email sent");
+		}catch(MessagingException me){
+			me.printStackTrace();
+		}
+	
+			
+			
 		// Try to load the user scene
 		try{
 			FXMLLoader userLoader = new FXMLLoader();
@@ -58,7 +97,11 @@ public class CartSceneController extends Application{
 		}catch (IOException ex){
 			ex.printStackTrace();
 		}
+		
+		conn.closeDB();
 	}
+	
+	
 	// Set up the labels to reflect what your car options were
 	@FXML 
 	private void initialize (){

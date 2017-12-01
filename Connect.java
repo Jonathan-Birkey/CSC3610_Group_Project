@@ -330,6 +330,62 @@ public class Connect {
 		return user;
 	}
 	
+	//getting the email of the user
+	public String getUserEmail() {
+		System.out.println("Called getUserEmail() method"); 
+		StringBuilder email = new StringBuilder();
+		
+		//SQL for getting the email of the logged in user
+        String SQL = "select email from user where userName = '" + UserSceneController.loggedInUser.getUserName() + "';";
+        //ResultSet
+        try {
+        	ResultSet rs = connection.createStatement().executeQuery(SQL);
+        	if(rs.next()){
+        		email.append(rs.getString(1));
+                System.out.println("Email retrieved: " + email.toString());
+            }
+        	else{
+        		System.out.println("Email not retrieved");
+        	}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return email.toString();
+	}
+	
+
+	
+	//getting the email of the user
+		public String getUserTransaction() {
+        	System.out.println("Called getUserTransacton() method");
+			TransactionTable trans = new TransactionTable();
+			
+			//SQL for getting the email of the logged in user
+	        String SQL = "select * from transaction where name = '" + UserSceneController.loggedInUser.getFirstName() + " " 
+	        		+ UserSceneController.loggedInUser.getLastName() + "';";
+	        //ResultSet
+	        try {
+	        	System.out.println("Before execute query");
+	        	ResultSet rs = connection.createStatement().executeQuery(SQL);
+	        	System.out.println("After execute query");
+	        	if(rs.next()){
+	        		trans.id.set(rs.getInt("id"));
+	        		trans.name.set(rs.getString("name"));
+	        		trans.model.set(rs.getString("model"));
+	        		trans.submodel.set(rs.getString("submodel"));
+	        		trans.color.set(rs.getString("color"));
+	        		trans.date_bought.set(rs.getDate("date_bought"));
+	        		trans.price.set(rs.getDouble("price"));
+	                System.out.println("Got the transaction");
+	            }
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return trans.toString();
+		}
+	
 	//admin
 	//Update User password action
 		public void updateUserPassword(Customer person1) {

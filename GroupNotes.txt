@@ -3,3 +3,15 @@ Somehow we lost the groupnotes.md
 So I made a new one -Kyle
 
 Theres a Carssss branch where I added in the new GUIs and they're linked together.  Right now the picture in the HomeScene doesn't work, and I don't know why
+
+Instructions to download the required jar to send emails.
+Go to: 
+https://javaee.github.io/javamail/
+Download by clicking "javax.mail.jar" about half way down the page
+Then put the jar where ever you have your other jars
+Right click the CSC3610_Group_Project project, go to properties
+Go to Java Build Path
+Select Libraries
+Then click Add External Jars
+Then select the javax.mail jar
+Hit apply then OK
