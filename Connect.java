@@ -235,7 +235,8 @@ public class Connect {
 		ObservableList<TransactionTable> data = FXCollections.observableArrayList();
 		
 		//SQL FOR SELECTING ALL OF CUSTOMER
-        String SQL = "SELECT * from transaction";
+         String SQL = "SELECT * from transaction WHERE name = '" + UserSceneController.loggedInUser.getFirstName()+ " " 
+        					+ UserSceneController.loggedInUser.getLastName() + "'";
         //ResultSet
         try {
 			ResultSet rs = connection.createStatement().executeQuery(SQL);
