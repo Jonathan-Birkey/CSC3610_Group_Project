@@ -1,5 +1,7 @@
 package CSC3610_Group_Project;
 
+import java.util.Iterator;
+
 public class Car {
 	// Create attributes
 	String color;
