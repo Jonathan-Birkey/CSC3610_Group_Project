@@ -2,6 +2,7 @@ package CSC3610_Group_Project;
 
 import java.io.IOException;
 import java.sql.Date;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -83,21 +84,40 @@ public class ReportsController {
 	
 	@FXML
 	public void btnSearchAction(ActionEvent e){
-		 if(TeslaBinarySearch.binarySearch(data, Double.parseDouble(txtSearch.getText())) != null) {
+			if(numsOnly()){
+				if(TeslaBinarySearch.binarySearch(data, Double.parseDouble(txtSearch.getText())) != null) {
+						Alert alert = new Alert(Alert.AlertType.ERROR);
+					    alert.setTitle("FOUND");
+					    alert.setHeaderText(" FOUND");
+					    alert.setContentText("That transaction was found in the database with the use of binary search!!!\nYay First Group!");
+					    alert.showAndWait();
+				  System.err.println("Found");
+		  	  } else {
+						Alert alert = new Alert(Alert.AlertType.ERROR);
+					    alert.setTitle("WAS NOT FOUND");
+					    alert.setHeaderText(" WAS NOT FOUND");
+					    alert.setContentText("That transaction was not found in the database");
+					    alert.showAndWait();
+				  System.err.println("Not found");
+		  	  }
+			}
+			else{
 				Alert alert = new Alert(Alert.AlertType.ERROR);
-			    alert.setTitle("FOUND");
-			    alert.setHeaderText(" FOUND");
-			    alert.setContentText("That transaction was found in the database with the use of binary search!!!\nYay First Group!");
+			    alert.setTitle("NUMBERS ONLY PLEASE");
+			    alert.setHeaderText(" NUMBERS ONLY PLEASE");
+			    alert.setContentText("At this time please only search numbers");
 			    alert.showAndWait();
-   		  System.err.println("Found");
-   	  } else {
-				Alert alert = new Alert(Alert.AlertType.ERROR);
-			    alert.setTitle("WAS NOT FOUND");
-			    alert.setHeaderText(" WAS NOT FOUND");
-			    alert.setContentText("That transaction was not found in the database");
-			    alert.showAndWait();
-   		  System.err.println("Not found");
-   	  }
+		  System.err.println("Not a number");
+			}
+	}
+	
+	private boolean numsOnly(){
+		try{
+			Double.parseDouble(txtSearch.getText());
+			return true;
+		}catch(NumberFormatException nfe){
+			return false;
+		}
 	}
 	
 }

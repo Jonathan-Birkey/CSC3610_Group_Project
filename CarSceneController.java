@@ -78,6 +78,11 @@ public class CarSceneController extends Application {
 		cboRoof.setItems(roofList);
 		carPicture.setImage(new Image("CSC3610_Group_Project/modelSGray.png"));
 		cboColor.setValue("Black");
+		cboInterior.setValue("Black Premium");
+		cboWheels.setValue("19\" Silver Slipstream");
+		cboRoof.setValue("Glass");
+		
+		
 
 		// populate the hashMap
 		hMap.put("Black", 0.0);
@@ -97,7 +102,16 @@ public class CarSceneController extends Application {
 		hMap.put("Sunroof", 2000.0);
 
 		NumberFormat format = NumberFormat.getCurrencyInstance();
-
+		btn75D.setStyle("-fx-background-color: #c2c2c2");
+		btn100D.setStyle("-fx-background-color: #ffffff");
+		btnP100D.setStyle("-fx-background-color: #ffffff");
+		
+		price = 75000.0;
+		battery = "75D";
+		totalPrice = price + priceRoof + priceWheels + priceInterior + priceColor;
+		lblPrice.setText(format.format(price + priceRoof + priceWheels + priceInterior + priceColor));
+		
+		
 		// listener for Color options
 		cboColor.valueProperty().addListener(new ChangeListener<String>() {
 			@Override
