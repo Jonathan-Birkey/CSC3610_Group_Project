@@ -73,7 +73,7 @@ public class UserSceneController extends Application {
 	 @FXML
 	 public void getStarted(ActionEvent e){	
 			FXMLLoader userLoader = new FXMLLoader();
-			userLoader.setLocation(LogInController.class.getResource("CarScene.fxml"));
+			userLoader.setLocation(CarSceneController.class.getResource("CarScene.fxml"));
 			try {
 				userLayout = (AnchorPane) userLoader.load();
 			} catch (IOException e1) {

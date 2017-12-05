@@ -96,8 +96,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#purchase" prefWidth="60.0" text="Order" />
-                  <Button mnemonicParsing="false" prefWidth="60.0" text="Edit" GridPane.columnIndex="1" />
+                  <Button fx:id="btnOrder" mnemonicParsing="false" onAction="#purchase" prefWidth="60.0" text="Order" />
+                  <Button fx:id="btnEdit" mnemonicParsing="false" onAction="#btnEditAction" prefWidth="60.0" text="Edit" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>
                   <Insets left="100.0" right="100.0" />

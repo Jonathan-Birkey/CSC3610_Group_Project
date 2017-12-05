@@ -49,8 +49,8 @@ public class TransactionTable implements Comparable<TransactionTable>{
 	}
 	@Override
 	public String toString() {
-		return "TransactionTable [id=" + id + ", name=" + name + ", model=" + model + ", submodel=" + submodel
-				+ ", color=" + color + ", date_bought=" + date_bought + ", price=" + price + "]";
+		return "\nOrder Number: " + id + "\nCustomer: " + name + "\nModel: " + model + "\nSubmodel: " + submodel
+				+ "\nColor: " + color + "\nPurchase Date: " + date_bought + "\nTotal: " + price;
 	}
 	
 

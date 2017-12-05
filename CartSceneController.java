@@ -17,9 +17,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -31,10 +33,15 @@ public class CartSceneController extends Application{
 	private AnchorPane rootLayout;
 	public static Car customizedCar;
 	private AnchorPane userLayout;
+	private AnchorPane carLayout;
 	// Labels from fxml
 	@FXML
 	private Label lblModel, lblModelPrice, lblColor, lblColorPrice, lblInterior, lblInteriorPrice, 
 	lblWheels, lblWheelsPrice, lblRoof, lblRoofPrice, lblTotal;
+	@FXML
+	private Button btnOrder;
+	@FXML
+	private Button btnEdit;
 	private HashMap<String, Double> hMap = new HashMap<>();
 	
 	// This happens when you press the Order button
@@ -67,6 +74,15 @@ public class CartSceneController extends Application{
 			
 			
 		try{
+			TransactionTable tt = conn.getUserTransaction();
+			String orderNum = tt.getId().toString();
+			String name = tt.getName();
+			String model = tt.getModel();
+			String submodel = tt.getSubmodel();
+			String color = tt.getColor();
+			String date = tt.getDate_bought().toString();
+			String total = tt.getPrice().toString();
+
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress("Tesla"));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(conn.getUserEmail()));
@@ -75,7 +91,13 @@ public class CartSceneController extends Application{
 					
 			message.setContent("<h:body style=background-color:white,font-family:verdana; color:#002>"
 					+ "Congratulations on your order:<br/>"
-					+ conn.getUserTransaction() + "<br/>"
+					+ "Order Number: "+ orderNum + "<br/>"
+					+ "Customer: : "+ name + "<br/>"
+					+ "Model: "+ model + "<br/>"
+					+ "Submodel: "+ submodel + "<br/>"
+					+ "Color: "+ color + "<br/>"
+					+ "Purcahse Date: "+ date + "<br/>"
+					+ "Total: "+ total + "<br/>"
 					+ "</body>", 
 					"text/html; charset=utf-8");
 			Transport.send(message);
@@ -88,11 +110,11 @@ public class CartSceneController extends Application{
 			
 		// Try to load the user scene
 		try{
-			FXMLLoader userLoader = new FXMLLoader();
-			userLoader.setLocation(LogInController.class.getResource("HomeScene.fxml"));
-			userLayout = (AnchorPane) userLoader.load();
+			FXMLLoader carLoader = new FXMLLoader();
+			carLoader.setLocation(LogInController.class.getResource("HomeScene.fxml"));
+			carLayout = (AnchorPane) carLoader.load();
 			
-			MasterPaneController.masterLayout.setCenter(userLayout);
+			MasterPaneController.masterLayout.setCenter(carLayout);
 
 		}catch (IOException ex){
 			ex.printStackTrace();
@@ -101,6 +123,19 @@ public class CartSceneController extends Application{
 		conn.closeDB();
 	}
 	
+	
+	@FXML
+	private void btnEditAction(ActionEvent e){
+		FXMLLoader userLoader = new FXMLLoader();
+		userLoader.setLocation(CarSceneController.class.getResource("CarScene.fxml"));
+		try {
+			userLayout = (AnchorPane) userLoader.load();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		MasterPaneController.masterLayout.setCenter(userLayout);
+	}
 	
 	// Set up the labels to reflect what your car options were
 	@FXML 

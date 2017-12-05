@@ -358,7 +358,7 @@ public class Connect {
 
 	
 	//getting the email of the user
-		public String getUserTransaction() {
+		public TransactionTable getUserTransaction() {
         	System.out.println("Called getUserTransacton() method");
 			TransactionTable trans = new TransactionTable();
 			
@@ -384,7 +384,7 @@ public class Connect {
 				e.printStackTrace();
 			}
 			
-			return trans.toString();
+			return trans;
 		}
 	
 	//admin
