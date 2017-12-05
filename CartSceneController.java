@@ -49,7 +49,7 @@ public class CartSceneController extends Application{
 	private void purchase() throws AddressException, SQLException {
 		// Create a transaction object to send into the database
 		Transaction transaction = new Transaction(UserSceneController.loggedInUser.getFirstName() + " " + UserSceneController.loggedInUser.getLastName(),
-				customizedCar, new Date(0));
+				customizedCar, new Date(System.currentTimeMillis()));
 		
 		//System.out.println(transaction);
 		Connect conn = new Connect();
